@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Polygon Paradise - Distance Calc</title>
+
+        <script>
+            function calcDistance(){
+                let sel1 = document.getElementById("seldes1");
+                let sel2 = document.getElementById("seldes2");
+
+                let pnt1 = sel1.value.split(",");
+                let pnt2 = sel2.value.split(",");
+
+                let dis = Math.sqrt(Math.pow(pnt1[0] - pnt2[0], 2) + Math.pow(pnt1[1] - pnt2[1], 2));
+
+                document.getElementById("distance").innerHTML = `distance: ${Math.round(dis)}`;
+            }
+        </script>
+
+    </head>
+    <body>
+        <label><select id="seldes1"></select></label>
+        <label><select id="seldes2"></select></label>
+        <button onclick="calcDistance()">calc</button>
+        <p id="distance"></p>
+
+        <script>
+let data = `dodecagon rapids,203.2,248.4
+pentagon bumpers,203.2,277.4
+heptagon coaster,238.7,122.6
+trapezoid show,280.6,61.3
+concave train,335.5,329
+Hexa-swings,300,303.2
+rhombus ride,267.7,267.7
+hot dog,274.2,187.1
+games,332.3,145.2
+star burst carousel,419.4,112.9
+wc,393.5,187.1
+gift shop,435.5,41.9
+triangle restaurant,525.8,151.6
+octagon flume,509.7,119.4
+ice cream,477.4,154.8
+square scramble,454.8,180.6
+decagon coaster,387.1,280.6`
+            data = data.split("\n");
+            for(let i = 0; i < data.length;i++){
+                data[i] = data[i].split(",");
+            }
+
+            let sel1 = document.getElementById("seldes1");
+            let sel2 = document.getElementById("seldes2");
+
+            for(item of data){
+                sel1.innerHTML = sel1.innerHTML + `<option value=${[item[1], item[2]].join(",")}>${item[0]}</option>`;
+            }
+            sel2.innerHTML = sel1.innerHTML;
+        </script>
+    </body>
+</html>
