@@ -47,14 +47,10 @@
    | Sale of Products | Sales revenue from equipments, drinks, and snacks |
 
 - Total Revenue:
-   $$
-   \text{Total Revenue} = \text{Membership Fee} + \text{Subscription Fee} + \text{Course Fee} + \text{Sale of Products} 
-   $$
+   $$\text{Total Revenue} = \text{Membership Fee} + \text{Subscription Fee} + \text{Course Fee} + \text{Sale of Products} $$
 
 - Average Monthly Revenue:
-   $$
-   \text{Average Monthly Revenue} = \frac{\text{Total Revenue}}{\text{Number of Months}}
-   $$
+   $$\text{Average Monthly Revenue} = \frac{\text{Total Revenue}}{\text{Number of Months}}$$
 
 **Cost *(SHORT-RUN)*:**
 
@@ -69,24 +65,16 @@
     - Content creation
 
 - **Total Cost:**
-   $$
-    \text{Total Cost} = \text{Fixed Cost} + \text{Variable Cost}
-    $$
+   $$\text{Total Cost} = \text{Fixed Cost} + \text{Variable Cost}$$
 
 - **Cost per Member:** (Evaluate the average cost for each member)
-   $$
-    \text{Cost per Member} = \frac{\text{Total Cost}}{\text{Number of Members}}
-    $$
+   $$\text{Cost per Member} = \frac{\text{Total Cost}}{\text{Number of Members}}$$
 
 - **Break-Even Point:** (Determine the point where total revenue equals total costs )
-   $$
-      \text{Break-Even Point} = \frac{\text{Fixed Costs}}{\text{Average Revenue per Member} - \text{Variable Costs per Member}} 
-      $$
+    $$\text{Break-Even Point} = \frac{\text{Fixed Costs}}{\text{Average Revenue per Member} - \text{Variable Costs per Member}} $$
 
 - **Profit Margin:** 
-   $$
-      \text{Profit Margin} = \frac{\text{Total Revenue} - \text{Total Cost}}{\text{Total Revenue}} \times 100
-      $$
+   $$\text{Profit Margin} = \frac{\text{Total Revenue} - \text{Total Cost}}{\text{Total Revenue}} \times 100$$
 
 ## Strategic Revenues & Fund Utilization:
 - To expand physical facilities, improve staff quality
