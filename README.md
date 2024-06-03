@@ -11,5 +11,4 @@ useful links:
 - [数列计算器](https://anson2251.github.io/sequence/)
 - [展开 (a+b)^n](https://anson2251.github.io/binomial-expansion-calculator/)
 - [solve2048 demo](https://anson2251.github.io/solve2048/)
-- [ECONOMIC PROJECT (Gym Membership)](https://anson2251.github.io/eco-project-gymMembership-23.11.pdf)
   
