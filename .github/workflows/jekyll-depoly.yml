@@ -41,12 +41,11 @@ jobs:
           cache-version: 0 # Increment this number if you need to re-download cached gems
       - name: Build
         run: bundle exec jekyll build
-  
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./_site
 
-          
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.0
+        with:
+          branch: gh-pages
+          folder: "./_site"
+
+
