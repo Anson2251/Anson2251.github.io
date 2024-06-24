@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://anson2251.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://anson2251.github.io/" rel="alternate" type="text/html" /><updated>2024-06-24T07:43:42+00:00</updated><id>https://anson2251.github.io/feed.xml</id><title type="html">Anson’s Blog</title><subtitle>A hidden nook for the quirky ideas</subtitle><entry><title type="html">New Blog Site!</title><link href="https://anson2251.github.io/jekyll/2024/06/24/new-blog-site.html" rel="alternate" type="text/html" title="New Blog Site!" /><published>2024-06-24T01:00:00+00:00</published><updated>2024-06-24T01:00:00+00:00</updated><id>https://anson2251.github.io/jekyll/2024/06/24/new-blog-site</id><content type="html" xml:base="https://anson2251.github.io/jekyll/2024/06/24/new-blog-site.html"><![CDATA[<h2 id="introduction">Introduction</h2>
+
+<p>I have updated my personal site to replace the previous plain Markdown-based site. The new site is built on Jekyll, allowing for better presentation and easier organization of my content.</p>
+
+<h2 id="migration-of-content">Migration of Content</h2>
+
+<p>I will be transferring the content from the <code class="language-plaintext highlighter-rouge">Useful Links</code> section of the old site into individual blog posts that explain how the projects work. This process will take some time, but I will complete it gradually.</p>
+
+<h2 id="useful-links-from-the-previous-page">Useful Links from the Previous Page</h2>
+
+<ul>
+  <li>The repository for this site: <a href="https://github.com/Anson2251/Anson2251.github.io">这个主页的储存库</a></li>
+  <li>Sequence Calculator: <a href="https://anson2251.github.io/sequence/">数列计算器</a></li>
+  <li>Binomial Expansion Calculator: <a href="https://anson2251.github.io/binomial-expansion-calculator/">展开 (a+b)^n</a></li>
+  <li>Solve2048 Demo: <a href="https://anson2251.github.io/solve2048/">solve2048 demo</a></li>
+</ul>
+
+<h2 id="why-jekyll">Why Jekyll?</h2>
+
+<p>Jekyll is a convenient tool for transforming plain text, written in Markdown, into static websites and blogs, which suits my preferences perfectly. GitHub also supports Jekyll with workflows for building and hosting the site online, allowing for a smooth transition.</p>
+
+<h2 id="future-posts">Future Posts</h2>
+
+<p>In upcoming posts, I will explain the design ideas behind the projects listed in the <code class="language-plaintext highlighter-rouge">Useful Links</code> section. I will also refurbish the projects and update the README files for each project.</p>]]></content><author><name></name></author><category term="jekyll" /><summary type="html"><![CDATA[Introduction]]></summary></entry><entry><title type="html">Deploying ‘Book Searcher’ on Your Laptop Using Z-Library Data</title><link href="https://anson2251.github.io/library/2024/06/23/depoly-book-searcher.html" rel="alternate" type="text/html" title="Deploying ‘Book Searcher’ on Your Laptop Using Z-Library Data" /><published>2024-06-23T13:00:00+00:00</published><updated>2024-06-23T13:00:00+00:00</updated><id>https://anson2251.github.io/library/2024/06/23/depoly-book-searcher</id><content type="html" xml:base="https://anson2251.github.io/library/2024/06/23/depoly-book-searcher.html"><![CDATA[<h2 id="introduction">Introduction</h2>
+
+<p>Are you tired of finding the electronic version of your favorite books? In this guide, I’ll walk you through how to deploy the Book Searcher project on your laptop, using data from Z-Library. By the end of this post, you’ll have a personal library search tool at your fingertips.</p>
+
+<h2 id="background">Background</h2>
+
+<p><a href="https://github.com/bigmouse0001/book-searcher"><u>Book Searcher</u></a> is a convenient tool to set up a personal library.</p>
+
+<blockquote>
+  <p>Easy and blazing-fast book searcher, create and search your private library. Book Searcher can index metadata for over 10 million books in one minute, and search in 30µs. (Cited from the README of the Book Searcher)</p>
+</blockquote>
+
+<p>With data from Z-Library, you can access countless electronic books freely.</p>
+
+<blockquote>
+  <p><span style="color:red">⚠️</span> <strong>Books are the works of their authors. It is recommended to buy the book, instead of using the version obtained from the internet “freely”.</strong></p>
+</blockquote>
+
+<p>Unfortunately, the demonstration site for <a href="https://book-searcher.eu.org/">Book Searcher</a> has recently become inaccessible. To address this, we’ll explore how to deploy the Book Searcher locally on a laptop.</p>
+
+<h2 id="how-to-deploy">How to Deploy</h2>
+
+<h3 id="1-get-the-book-searcher">1. Get the Book Searcher</h3>
+
+<p>First, find and download the Book Searcher software.</p>
+
+<ol>
+  <li>Visit the <a href="https://github.com/bigmouse0001/book-searcher/releases">release page</a> on GitHub.</li>
+  <li>Download the release suitable for your platform and CPU architecture.</li>
+  <li>Unzip the downloaded file to extract the executable.</li>
+</ol>
+
+<h3 id="2-obtain-the-z-library-data">2. Obtain the Z-Library Data</h3>
+
+<p>Book Searcher uses indexes for efficient book searching. You can download the indexes from <a href="https://onedrive.caomingjun.com/zh-CN/%F0%9F%96%A5%E8%BD%AF%E4%BB%B6/zlib-searcher/releases/">this mirror</a> (Thanks to Cmj), preferably version 1.2.0.</p>
+
+<p>For more information about this step, you can  visit <a href="https://www.eula.club/blogs/%E6%90%AD%E5%BB%BABook-Searcher%E5%AE%9E%E7%8E%B0%E4%B9%A6%E7%B1%8D%E6%A3%80%E7%B4%A2.html#_3-book-searcher%E4%B9%A6%E7%B1%8D%E6%A3%80%E7%B4%A2">this post</a>.</p>
+
+<h3 id="3-configure-the-book-searcher">3. Configure the Book Searcher</h3>
+
+<p>Now, prepare the files:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── book-searcher
+└── index
+    ├── 37c0704c609e49648af4eefe19aafa35.fast
+    ├── 37c0704c609e49648af4eefe19aafa35.fieldnorm
+    ├── 37c0704c609e49648af4eefe19aafa35.idx
+    ├── 37c0704c609e49648af4eefe19aafa35.pos
+    ├── 37c0704c609e49648af4eefe19aafa35.store
+    ├── 37c0704c609e49648af4eefe19aafa35.term
+    └── meta.json
+</code></pre></div></div>
+
+<p>Unzip the index file to match the structure above. Then, open the terminal and start the service:</p>
+
+<div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./book-searcher run
+</code></pre></div></div>
+
+<p>The terminal will display the address where you can access Book Searcher via your browser.</p>
+
+<h3 id="4-ipfs-gateways">4. IPFS Gateways</h3>
+
+<p>To download books, you’ll need IPFS gateways. Here are some recommended gateways:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://4everland.io/ipfs/
+https://ipfs.io/ipfs/
+https://hardbin.com/ipfs/
+https://trustless-gateway.link/ipfs/
+https://dweb.link/ipfs/
+https://ipfs.runfission.com/ipfs/
+https://w3s.link/ipfs/
+https://gateway.pinata.cloud/ipfs/
+https://ipfs.eth.aragon.network/ipfs/
+https://nftstorage.link/ipfs/
+</code></pre></div></div>
+
+<p>For more information, use the <a href="https://ipfs.github.io/public-gateway-checker/">Public Gateway Checker</a>.</p>
+
+<p>By adding the setting of the Book Searcher, we finally managed to configure the book searcher.</p>
+
+<h2 id="references">References</h2>
+
+<p>This blog uses the resources/information from the following web pages:</p>
+
+<ul>
+  <li><a href="https://github.com/bigmouse0001/book-searcher/releases">Book Searcher Github Repository</a></li>
+  <li><a href="https://ipfs.github.io/public-gateway-checker/">Public Gateway Checker</a></li>
+  <li><a href="https://onedrive.caomingjun.com/zh-CN/%F0%9F%96%A5%E8%BD%AF%E4%BB%B6/zlib-searcher/">The index mirror on Cmj’s OneDrive</a></li>
+  <li><a href="https://www.eula.club/blogs/%E6%90%AD%E5%BB%BABook-Searcher%E5%AE%9E%E7%8E%B0%E4%B9%A6%E7%B1%8D%E6%A3%80%E7%B4%A2.html">搭建 Book-Searcher 实现书籍检索</a></li>
+</ul>
+
+<p>This version should be clearer and more organized, making it easier for readers to follow and replicate the steps.</p>]]></content><author><name></name></author><category term="library" /><summary type="html"><![CDATA[Introduction]]></summary></entry></feed>
