@@ -68,6 +68,8 @@ To simplify adding new credentials, I packaged the key replacement into a more g
 
 ## Final Code for the framework
 
+The modified `vite.config.ts`:
+
 ```typescript
 import { promises as fs } from "fs"; // handling file operations in node
 import { defineConfig } from "vite";
