@@ -10,4 +10,4 @@ The blogs and pages are organised by [Jekyll](https://jekyllrb.com/) with theme 
 
 You can find the source code of this website in this [repository](https://github.com/anson2251/anson2251.github.io).
 
-This page last updated: 4 June 2024.
+Last update: Jun. 24, 2024.

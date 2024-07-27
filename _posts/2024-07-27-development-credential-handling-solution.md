@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Protecting Secrets: Credential Handling for Open-Source Projects"
-date: 2024-06-24 09:00:00 +0800
+date: 2024-07-27 22:30:00 +0800
 categories: credentials, programming
 ---
 
