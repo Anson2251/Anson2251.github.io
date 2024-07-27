@@ -182,3 +182,8 @@ export default defineConfig(async () => {
 ## Conclusion
 
 This framework simplifies secure credential management for open-source projects by using private configuration files and environment variables. It ensures credentials are protected while supporting automated builds with GitHub Actions. This approach helps maintain security without complicating the development process.
+
+## References
+
+- [Trackmaker Project README.md](https://github.com/Anson2251/trackmaker/blob/main/README.md), accessed July 27, 2024.
+- [Vite Configuration `define`](https://vitejs.dev/config/shared-options.html#define), accessed July 27, 2024.
