@@ -91,7 +91,7 @@ This blog uses the resources/information from the following web pages:
 - [Book Searcher Github Repository](https://github.com/bigmouse0001/book-searcher/releases)
 - [Public Gateway Checker](https://ipfs.github.io/public-gateway-checker/)
 - [The index mirror on Cmj's OneDrive](https://onedrive.caomingjun.com/zh-CN/%F0%9F%96%A5%E8%BD%AF%E4%BB%B6/zlib-searcher/)
-- [搭建 Book-Searcher 实现书籍检索](https://www.eula.club/blogs/%E6%90%AD%E5%BB%BABook-Searcher%E5%AE%9E%E7%8E%B0%E4%B9%A6%E7%B1%8D%E6%A3%80%E7%B4%A2.html)
+- [搭建 Book-Searcher 实现书籍检索](https://www.eula.club/blogs/%E6%90%AD%E5%BB%BABook-Searcher%E5%AE%9E%E7%8E%B0%E4%B9%A6%E7%B1%8D%E6%A3%80%E7%B4%A2.html) [(Archived)](https://web.archive.org/web/20240930211053/https://www.eula.club/blogs/%E6%90%AD%E5%BB%BABook-Searcher%E5%AE%9E%E7%8E%B0%E4%B9%A6%E7%B1%8D%E6%A3%80%E7%B4%A2.html#_1-%E5%89%8D%E8%A8%80)
 
 
 This version should be clearer and more organized, making it easier for readers to follow and replicate the steps.
