@@ -2,7 +2,7 @@
 layout: post
 title: "Protecting Secrets: Credential Handling for Open-Source Projects"
 date: 2024-07-27 22:30:00 +0800
-categories: credentials, programming
+categories: credentials programming
 ---
 
 ## Introduction
@@ -57,6 +57,8 @@ Additionally, using `JavaScript Obfuscator` can encrypt the credentials, ensurin
 - [ ] New credentials can be added easily.
 
 ### Generalised Framework
+
+> There is a node package called `dotenv`, which does exactly what the following framework does.
 
 To simplify adding new credentials, I packaged the key replacement into a more generalised framework.
 
