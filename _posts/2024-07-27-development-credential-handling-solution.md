@@ -5,6 +5,8 @@ date: 2024-07-27 22:30:00 +0800
 categories: credentials programming
 ---
 
+{% include override-styles.html %}
+
 ## Introduction
 
 This blog aims to document an effective method I recently developed for managing credential API keys in the open-source project [Trackmaker](https://github.com/Anson2251/trackmaker) which I have been developing for a long time, and the journey I came up with this method. The method uses a private credential configuration file to store the credentials or passes the credentials via environment variables. The first approach simplifies debugging, while the second approach enables GitHub Actions to automatically build GitHub Pages without the need to upload a private credential configuration file.

@@ -5,6 +5,8 @@ date: 2025-01-18
 categories: physics mathematics
 ---
 
+{% include override-styles.html %}
+
 {% include math-support.html %}
 
 ## Introduction
@@ -21,7 +23,8 @@ where $$C$$ is a positive constant.
 
 How to model this motion? A reference circle can be used.
 
-![Reference Circle](/assets/2025-01-18-why-simple-harmonic-motion-can-be-modelled-by-a-reference-circle/Unit_circle_angles_color.svg)
+{% include center-figure.html src="/assets/2025-01-18-why-simple-harmonic-motion-can-be-modelled-by-a-reference-circle/Unit_circle_angles_color.svg" alt="A reference circle" maxw="400px" maxh="400px" %}
+
 > A reference circle. By [Jim.belk](//commons.wikimedia.org/w/index.php?title=User:Jim.belk&action=edit&redlink=1) - *Own work*, Public Domain, [Link](https://commons.wikimedia.org/w/index.php?curid=12062595)
 
 By projecting the motion of a particle moving in a circle onto a diameter, we have:
@@ -39,6 +42,8 @@ Where $$\omega$$ is the angular speed of the reference circle, and $$\theta$$ is
 But wait, why can we model SHM with a reference circle? In order to answer this question, we need to dive into the mathematics behind it.
 
 ## 2. Some Mathematical Derivation
+
+In the following equation, we are going to ignore frictions and other external forces.
 
 Since we were introduced to simple harmonic motion from the motion of a spring. Let's start from the Hooke's Law, which states the force $$F$$ exerted by a spring is proportional to the displacement $$x$$ from its equilibrium position:
 
@@ -127,6 +132,7 @@ x(t) = A\cos\left(\sqrt{\frac{k}{m}} t\right) + B\sin\left(\sqrt{\frac{k}{m}} t\
 $$
 
 By using the trigonometric identity (compound angle formula) we used in Pure Mathmatics 3:
+<!-- add more details -->
 
 $$
 \begin{align}

@@ -6,6 +6,8 @@ date:   2024-06-24 09:00:00 +0800
 categories: jekyll
 ---
 
+{% include override-styles.html %}
+
 ## Introduction
 
 I have updated my personal site to replace the previous plain Markdown-based site. The new site is built on Jekyll, allowing for better presentation and easier organization of my content.
