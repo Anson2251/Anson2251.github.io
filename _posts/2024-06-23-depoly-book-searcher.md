@@ -6,6 +6,7 @@ categories: library
 ---
 
 {% include override-styles.html %}
+{% include load-barlow-font.html %}
 
 ## Introduction
 

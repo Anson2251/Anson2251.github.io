@@ -6,6 +6,7 @@ categories: physics mathematics
 ---
 
 {% include override-styles.html %}
+{% include load-barlow-font.html %}
 
 {% include math-support.html %}
 

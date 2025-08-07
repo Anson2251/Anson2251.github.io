@@ -6,5 +6,6 @@ layout: home
 ---
 
 {% include override-styles.html %}
+{% include load-barlow-font.html %}
 
 Welcome to my blog!
