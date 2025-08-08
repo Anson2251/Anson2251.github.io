@@ -328,7 +328,7 @@ $$ I = I_0 e^{j\phi_i} \tag{4.5} $$
 
 使用相量表示法，我们可以将复杂的微分方程转换为简单的代数方程。让我们通过电感和电容的例子，一步一步地详细说明这个过程。
 
-###### 电感的例子：从微分方程到代数方程=
+###### 电感的例子：从微分方程到代数方程
 
 在时域中，电感的电压-电流关系是一个微分方程：
 
@@ -355,7 +355,7 @@ $$ V_L(t) = L \frac{\mathrm d}{\mathrm dt}[I_0 \sin(\omega t + \phi_i)] $$
 
 $$ V_L(t) = L \cdot I_0 \omega \cos(\omega t + \phi_i) \tag{4.8} $$
 
-利用三角恒等式 $\cos\theta = \sin(\theta + \dfrac{\pi}{2})$，我们可以将方程(3)改写为：
+利用三角恒等式 $\cos\theta = \sin(\theta + \dfrac{\pi}{2})$，我们可以将方程 $(4.8)$ 改写为：
 
 $$ V_L(t) = L \cdot I_0 \omega \sin(\omega t + \phi_i + \frac{\pi}{2}) \tag{4.9} $$
 
@@ -721,7 +721,7 @@ $$ Y_L = \frac{1}{j\omega L} = -j\frac{1}{\omega L} $$
 
 {% include center-figure.html src="/assets/2025-08-07-a-brief-introduction-on-impedance/Low_pass_filter.png" alt="LC Circuit" maxw="400px" maxh="400px" %}
 
-> Schematic of a simple parallel LC circuit. From wikipedia, [Link](https://commons.wikimedia.org/wiki/File:Low_pass_filter.png)
+> Schematic of a simple parallel LC circuit, [from wikipedia](https://commons.wikimedia.org/wiki/File:Low_pass_filter.png)
 
 该电路的传递函数为：
 
@@ -735,7 +735,7 @@ $$ H(f) = \frac{V_{out}}{V_{in}} = \frac{1}{1 + j2\pi fRC} \tag{5.1} $$
 
 {% include center-figure.html src="/assets/2025-08-07-a-brief-introduction-on-impedance/CR_high_pass_filter.svg.png" alt="High Pass Filter" maxw="300px" maxh="300px" %}
 
-> A high-pass filter. From wikipedia, [Link](https://commons.wikimedia.org/wiki/File:CR_high_pass_filter.svg)
+> A high-pass filter, [from wikipedia](https://commons.wikimedia.org/wiki/File:CR_high_pass_filter.svg)
 
 该电路的传递函数为：
 
@@ -751,7 +751,7 @@ $$ H(f) = \frac{V_{out}}{V_{in}} = \frac{j2\pi fRC}{1 + j2\pi fRC} \tag{5.2} $$
 
 {% include center-figure.html src="/assets/2025-08-07-a-brief-introduction-on-impedance/LC_parallel_simple.svg.png" alt="LC Circuit" maxw="200px" maxh="200px" %}
 
-> Schematic of a simple parallel LC circuit. From wikipedia, [Link](https://commons.wikimedia.org/wiki/File:LC_parallel_simple.svg)
+> Schematic of a simple parallel LC circuit, [from wikipedia](https://commons.wikimedia.org/wiki/File:LC_parallel_simple.svg)
 
 串联谐振电路的总阻抗为：
 
