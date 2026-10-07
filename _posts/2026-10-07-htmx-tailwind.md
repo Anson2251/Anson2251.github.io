@@ -7,6 +7,7 @@ categories: [Web Development, Programming]
 
 {% include override-styles.html %}
 {% include load-barlow-font.html %}
+{% include mermaid-support.html %}
 
 > 一个关于“复古工具”为何在今天依然成立的故事。
 
