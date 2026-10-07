@@ -107,6 +107,6 @@
 	font-style: italic;
 }
 
-*:not(.katex, .katex *) {
+*:not(.katex, .katex *, pre, pre *, code, code *) {
 	font-family: 'Barlow', sans-serif !important;
 }
