@@ -13,7 +13,7 @@ When I was working on the Trackmaker project, the overflow behaviour of `grid` b
 
 <img src="/assets/2024-11-21-css-overflow-behaviour/css-is-awesome.png" style="max-width: 256px" alt="CSS is awesome" />
 
-> CSS is awesome! [link](www.etsy.com/jp/listing/891486110/css-is-awesome-mug)
+> CSS is awesome! [link](https://www.etsy.com/jp/listing/891486110/css-is-awesome-mug)
 
 
 # 0x1: On the CSS Box Model and Overflow
@@ -364,4 +364,3 @@ When you explicitly set `min-width: 0` and `min-height: 0`, you override the def
   - Prevents content from unintentionally stretching the container.
 
 This simple rule is especially helpful in complex layouts with dynamic content or nested containers.
-
