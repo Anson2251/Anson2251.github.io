@@ -210,6 +210,10 @@ button {
     text-underline-offset: 6px;
 }
 
+.nav-blog-short {
+    display: none;
+}
+
 .theme-toggle {
     display: grid;
     place-items: center;
@@ -1221,6 +1225,14 @@ html[data-apps-view="list"] .app-row {
 @media (max-width: 640px) {
     :root {
         --footer-h: 100px;
+    }
+
+    .nav-blog-full {
+        display: none;
+    }
+
+    .nav-blog-short {
+        display: inline;
     }
 
     .nav-github,

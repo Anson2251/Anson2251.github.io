@@ -8,7 +8,7 @@ import type {
 import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
-	title: "ANSONATE",
+	title: "To Ansonated",
 	subtitle: "A commonplace book for things I build, read, and wonder about",
 	lang: "en", // Language code, e.g. 'en', 'zh_CN', 'ja', etc.
 	themeColor: {
@@ -44,6 +44,11 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Home,
 		LinkPreset.Archive,
 		LinkPreset.About,
+		{
+			name: "Ansonate",
+			url: "https://ansonate.ink",
+			external: true,
+		},
 		{
 			name: "GitHub",
 			url: "https://github.com/Anson2251", // Internal links should not include the base path, as it is automatically added

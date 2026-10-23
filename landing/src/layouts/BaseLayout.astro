@@ -12,6 +12,7 @@ interface Props {
 	description: string;
 	path?: string;
 	image?: string;
+	noindex?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
 	description,
 	path = Astro.url.pathname,
 	image = "/images/banner.jpg",
+	noindex = false,
 } = Astro.props;
 
 const canonical = new URL(path, "https://ansonate.ink").toString();
@@ -33,7 +35,8 @@ const ogImage = new URL(image, "https://ansonate.ink").toString();
 		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" sizes="any" />
-		<link rel="canonical" href={canonical} />
+		{!noindex && <link rel="canonical" href={canonical} />}
+		{noindex && <meta name="robots" content="noindex" />}
 
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="ANSONATE" />

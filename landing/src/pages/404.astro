@@ -1,0 +1,81 @@
+---
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { site } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	title={`Page not found — ${site.name}`}
+	description="The page you're looking for doesn't exist or has moved."
+	noindex
+>
+	<SiteHeader standalone />
+	<main id="main" class="not-found">
+		<p class="not-found-code" aria-hidden="true">404</p>
+		<div class="not-found-inner">
+			<p class="eyebrow">Error 404</p>
+			<h1 class="display">Dead end.</h1>
+			<p class="lede">
+				The page you're looking for doesn't exist, or it moved. Try the writing
+				archive, the apps index, or head back home.
+			</p>
+			<nav class="not-found-links" aria-label="Where to go next">
+				<a class="text-link" href="/">Home <span aria-hidden="true">→</span></a>
+				<a class="text-link" href={site.blogUrl}>
+					Writing <span aria-hidden="true">→</span>
+				</a>
+				<a class="text-link" href="/apps">Apps <span aria-hidden="true">→</span></a>
+			</nav>
+		</div>
+	</main>
+	<SiteFooter />
+</BaseLayout>
+
+<style>
+	.not-found {
+		position: relative;
+		display: flex;
+		align-items: center;
+		min-height: calc(100dvh - var(--header-h) - var(--footer-h));
+		padding: clamp(48px, 10vw, 120px) var(--gutter);
+		overflow: hidden;
+	}
+
+	.not-found-inner {
+		position: relative;
+		z-index: 1;
+		width: 100%;
+		max-width: 1180px;
+		margin: 0 auto;
+	}
+
+	.not-found-code {
+		position: absolute;
+		top: 50%;
+		right: var(--gutter);
+		margin: 0;
+		transform: translateY(-50%);
+		color: transparent;
+		font: 700 clamp(7rem, 26vw, 24rem) / 0.75 var(--font-mono);
+		letter-spacing: -0.12em;
+		-webkit-text-stroke: 1.5px var(--border-strong);
+		pointer-events: none;
+		user-select: none;
+	}
+
+	.not-found-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 30px;
+		margin-top: 10px;
+	}
+
+	@media (max-width: 700px) {
+		.not-found-code {
+			top: 28%;
+			right: calc(var(--gutter) * -0.5);
+			opacity: 0.55;
+		}
+	}
+</style>

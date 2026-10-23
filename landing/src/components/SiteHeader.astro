@@ -3,16 +3,19 @@ import { site } from "../data/site";
 
 interface Props {
 	appsPage?: boolean;
+	standalone?: boolean;
 }
 
-const { appsPage = false } = Astro.props;
-const writingHref = appsPage ? "https://ansonate.ink/#writing" : "#writing";
-const appsHref = appsPage ? "/apps" : "#apps";
+const { appsPage = false, standalone = false } = Astro.props;
+const writingHref =
+	appsPage || standalone ? "https://ansonate.ink/#writing" : "#writing";
+const appsHref = standalone ? "/apps" : appsPage ? "/apps" : "#apps";
+const homeHref = appsPage || standalone ? "/" : "#top";
 ---
 
 <header class="site-header">
 	<div class="header-inner">
-		<a class="brand" href={appsPage ? "/" : "#top"} aria-label="ANSONATE — home">
+		<a class="brand" href={homeHref} aria-label="ANSONATE — home">
 			<img src="/images/avatar.jpg" alt="" width="34" height="34" />
 			<span class="brand-name">ANSONATE</span>
 			<span class="brand-handle">Anson2251</span>
@@ -21,6 +24,17 @@ const appsHref = appsPage ? "/apps" : "#apps";
 		<nav class="nav" aria-label="Primary">
 			<a href={writingHref}>Writing</a>
 			<a href={appsHref} aria-current={appsPage ? "page" : undefined}>Apps</a>
+			<a
+				class="nav-blog"
+				href={site.blogUrl}
+				target="_blank"
+				rel="noreferrer"
+				aria-label="To Ansonated"
+			>
+				<span class="nav-blog-full">To Ansonated</span>
+				<span class="nav-blog-short">Blog</span>
+				<span aria-hidden="true"> ↗</span>
+			</a>
 			<a class="nav-linkedin" href={site.linkedinUrl} target="_blank" rel="noreferrer">
 				LinkedIn<span aria-hidden="true"> ↗</span>
 			</a>

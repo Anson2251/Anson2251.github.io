@@ -36,4 +36,8 @@ export const th: Translation = {
 	[Key.author]: "ผู้เขียน",
 	[Key.publishedAt]: "เผยแพร่เมื่อ",
 	[Key.license]: "สัญญาอนุญาต",
+
+	[Key.notFoundTitle]: "ไม่พบหน้าที่ต้องการ",
+	[Key.notFoundDescription]: "หน้าที่คุณกำลังมองหาไม่มีอยู่หรือถูกย้ายไปแล้ว",
+	[Key.backHome]: "กลับหน้าแรก",
 };
