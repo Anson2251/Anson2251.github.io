@@ -40,6 +40,13 @@ export default defineConfig({
 			// the default value `transition-` cause transition delay
 			// when the Tailwind class `transition-all` is used
 			containers: ["main", "#toc"],
+			// Asset links (e.g. the downloadable archive in a post) are not pages.
+			// Without this, swup fetches them, fails to find its containers, and
+			// aborts with the page stuck in the transition classes.
+			ignore: [
+				/^\/assets\//,
+				/\.(?:zip|pdf|docx?|xlsx?|pptx?|csv|png|jpe?g|gif|webp|avif|svg|mp4|webm|mp3|wav)$/i,
+			],
 			smoothScrolling: true,
 			cache: true,
 			preload: true,

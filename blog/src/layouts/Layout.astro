@@ -584,6 +584,18 @@ if (window.swup) {
 const MERMAID_CDN =
 	"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
 
+// Swup's scripts plugin re-executes every body script after a page swap, so this
+// module is evaluated again on each visit. Keep the one-time setup state on
+// window, otherwise every navigation registers another page:view hook and two
+// concurrent mermaid.run() calls rewrite the same <pre> while it is rendering.
+interface MermaidRuntime {
+	mounted: boolean;
+	queue: Promise<void>;
+}
+const mermaidRuntime: MermaidRuntime = ((
+	window as unknown as { __mermaidRuntime?: MermaidRuntime }
+).__mermaidRuntime ??= { mounted: false, queue: Promise.resolve() });
+
 function mermaidTheme(): string {
 	return document.documentElement.classList.contains("dark") ? "dark" : "neutral";
 }
@@ -615,6 +627,9 @@ async function renderMermaid(): Promise<void> {
 		const { default: mermaid } = await import(MERMAID_CDN);
 		for (const pre of pres) {
 			if (!pre.dataset.source) pre.dataset.source = pre.textContent ?? "";
+			// mermaid skips elements it has already processed; clear the flag so
+			// restoring the source (e.g. on theme change) actually re-renders.
+			pre.removeAttribute("data-processed");
 			pre.textContent = pre.dataset.source;
 		}
 		mermaid.initialize({ startOnLoad: false, theme });
@@ -637,18 +652,26 @@ async function renderMermaid(): Promise<void> {
 	}
 }
 
+// Serialize renders so overlapping visits or a theme flip never call
+// mermaid.run() on an element that is already mid-render.
+function scheduleMermaidRender(): void {
+	mermaidRuntime.queue = mermaidRuntime.queue.then(renderMermaid);
+}
+
 let lastMermaidTheme = mermaidTheme();
 function onThemeFlip(): void {
 	const theme = mermaidTheme();
 	if (theme === lastMermaidTheme) return;
 	lastMermaidTheme = theme;
-	renderMermaid();
+	scheduleMermaidRender();
 }
 
 const setupMermaid = () => {
+	if (mermaidRuntime.mounted) return;
+	mermaidRuntime.mounted = true;
 	lastMermaidTheme = mermaidTheme();
-	renderMermaid();
-	window.swup.hooks.on("page:view", renderMermaid);
+	scheduleMermaidRender();
+	window.swup.hooks.on("page:view", scheduleMermaidRender);
 	new MutationObserver(onThemeFlip).observe(document.documentElement, {
 		attributes: true,
 		attributeFilter: ["class"],
