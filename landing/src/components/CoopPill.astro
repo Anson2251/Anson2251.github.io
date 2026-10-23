@@ -13,14 +13,18 @@ const label = `Open to co-op for ${coop.term} — ${coop.program}, ${coop.school
 			href={coop.href || undefined}
 			aria-label={coop.href ? `${label}. Get in touch.` : undefined}
 		>
-			<span class="coop-dot" aria-hidden="true" />
-			<strong>Open to co-op</strong>
-			<span class="coop-sep" aria-hidden="true">·</span>
-			<span>{coop.term}</span>
-			<span class="coop-sep" aria-hidden="true">·</span>
-			<span>{coop.program}, {coop.school}</span>
-			<span class="coop-sep" aria-hidden="true">·</span>
-			<span>{coop.level}</span>
+		    <span class="coop-dot" aria-hidden="true" />
+			<span class="coop-pill-row">
+				<strong>Open to co-op</strong>
+				<span class="coop-sep" aria-hidden="true">·</span>
+				<span>{coop.term}</span>
+				<span class="coop-sep" aria-hidden="true">·</span>
+				<span>{coop.level}</span>
+				<span class="coop-sep coop-sep--inline" aria-hidden="true">·</span>
+			</span>
+			<span class="coop-pill-row">
+				<span>{coop.program}, {coop.school}</span>
+			</span>
 		</Tag>
 	)
 }
