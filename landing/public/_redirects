@@ -14,3 +14,22 @@
 /physics/:category/2025/08/07/a-brief-introduction-on-impedance.html  https://blogs.ansonate.ink/posts/a-brief-introduction-on-impedance/  301
 /:category/programming/2026/10/07/htmx-tailwind.html  https://blogs.ansonate.ink/posts/htmx-tailwind/  301
 /:category/programming/2026/10/07/htmx-tailwind-en.html  https://blogs.ansonate.ink/posts/htmx-tailwind-en/  301
+
+# Old app paths (apex) -> GitHub Pages apps host
+/resume-tailor/*  https://dev.ansonate.ink/resume-tailor/:splat  301
+/mour/*  https://dev.ansonate.ink/mour/:splat  301
+/cpc-online/*  https://dev.ansonate.ink/cpc-online/:splat  301
+/trackmaker/*  https://dev.ansonate.ink/trackmaker/:splat  301
+/paper-extract/*  https://dev.ansonate.ink/paper-extract/:splat  301
+/solve2048/*  https://dev.ansonate.ink/solve2048/:splat  301
+/binomial-expansion-calculator/*  https://dev.ansonate.ink/binomial-expansion-calculator/:splat  301
+/sequence/*  https://dev.ansonate.ink/sequence/:splat  301
+/RhythMC-TexturePack-Maker-Web/*  https://dev.ansonate.ink/RhythMC-TexturePack-Maker-Web/:splat  301
+/caie-assembly-interpreter/*  https://dev.ansonate.ink/caie-assembly-interpreter/:splat  301
+/CrediCheck/*  https://dev.ansonate.ink/CrediCheck/:splat  301
+/hangman-game/*  https://dev.ansonate.ink/hangman-game/:splat  301
+/octopinion-writing-system/*  https://dev.ansonate.ink/octopinion-writing-system/:splat  301
+
+# Lowercase aliases for the two mixed-case repo paths
+/credicheck/*  https://dev.ansonate.ink/CrediCheck/:splat  301
+/rhythmc-texture-pack-maker/*  https://dev.ansonate.ink/RhythMC-TexturePack-Maker-Web/:splat  301
