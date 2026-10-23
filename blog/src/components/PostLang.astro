@@ -1,0 +1,128 @@
+---
+// Site language selector. ZH / EN switch the page language (chrome strings
+// via site-lang) and the post listing filter together; on a post page they
+// also jump to the translated post when one exists.
+---
+<div class="post-lang-switch" role="group" aria-label="Language">
+    <button type="button" data-post-lang-btn="zh">ZH</button>
+    <button type="button" data-post-lang-btn="en">EN</button>
+</div>
+<style>
+    .post-lang-switch {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        padding: 2px;
+        border-radius: 0.65rem;
+        background: rgb(0 0 0 / 0.05);
+    }
+    :global(.dark) .post-lang-switch {
+        background: rgb(255 255 255 / 0.1);
+    }
+    .post-lang-switch button {
+        padding: 0.3rem 0.6rem;
+        border-radius: 0.5rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: rgb(0 0 0 / 0.5);
+        transition: all 0.2s;
+    }
+    :global(.dark) .post-lang-switch button {
+        color: rgb(255 255 255 / 0.5);
+    }
+    .post-lang-switch button.is-active {
+        background: var(--card-bg);
+        color: var(--primary);
+        font-weight: 700;
+        box-shadow: 0 1px 3px rgb(0 0 0 / 0.12);
+    }
+</style>
+<script>
+import {
+	POST_LANG_EVENT,
+	getPostLangPref,
+	normLang,
+	setPostLangPref,
+	type PostLangPref,
+} from "@utils/post-lang";
+import {
+	SITE_LANG_EVENT,
+	applySiteLang,
+	getSiteLangPref,
+	setSiteLangPref,
+	type SiteLang,
+} from "@utils/site-lang";
+
+function syncButtons(pref: PostLangPref): void {
+	document.querySelectorAll<HTMLButtonElement>("[data-post-lang-btn]").forEach((b) => {
+		b.classList.toggle("is-active", b.getAttribute("data-post-lang-btn") === pref);
+	});
+}
+
+function applyPostLang(): void {
+	const pref = getPostLangPref();
+	syncButtons(pref);
+	const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-post-card]"));
+	if (pref === "all") {
+		for (const c of cards) c.hidden = false;
+		return;
+	}
+	const groups = new Map<string, HTMLElement[]>();
+	for (const c of cards) {
+		const k = c.dataset.tkey || "";
+		if (!k) {
+			c.hidden = false;
+			continue;
+		}
+		const g = groups.get(k);
+		if (g) g.push(c);
+		else groups.set(k, [c]);
+	}
+	for (const g of groups.values()) {
+		const match = g.find((c) => normLang(c.dataset.lang) === pref) ?? g[0];
+		for (const c of g) c.hidden = c !== match;
+	}
+}
+
+function applySiteChrome(): void {
+	applySiteLang(getSiteLangPref());
+}
+
+function switchSiteLang(target: SiteLang): void {
+	setSiteLangPref(target);
+	setPostLangPref(target);
+	// On a post page, jump to the translation when it matches the target.
+	const twin = document.querySelector<HTMLAnchorElement>("a[data-twin-lang]");
+	const root = document.querySelector<HTMLElement>("[data-post-root]");
+	if (twin?.dataset.twinLang && root?.dataset.postLang) {
+		if (normLang(twin.dataset.twinLang) === target && normLang(root.dataset.postLang) !== target) {
+			window.location.href = twin.href;
+		}
+	}
+}
+
+document.addEventListener("click", (e) => {
+	const t = e.target;
+	if (!(t instanceof Element)) return;
+	const btn = t.closest("[data-post-lang-btn]");
+	if (!btn) return;
+	const v = btn.getAttribute("data-post-lang-btn");
+	if (v === "zh" || v === "en") switchSiteLang(v);
+});
+
+document.addEventListener(POST_LANG_EVENT, applyPostLang);
+document.addEventListener(SITE_LANG_EVENT, applySiteChrome);
+if (window.swup) {
+	window.swup.hooks.on("page:view", () => {
+		applyPostLang();
+		applySiteChrome();
+	});
+} else {
+	document.addEventListener("swup:enable", () => window.swup.hooks.on("page:view", () => {
+		applyPostLang();
+		applySiteChrome();
+	}));
+}
+applyPostLang();
+applySiteChrome();
+</script>

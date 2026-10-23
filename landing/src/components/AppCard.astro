@@ -1,0 +1,47 @@
+---
+import { type App, appHue, statusLabel } from "../data/apps";
+
+interface Props {
+	app: App;
+}
+
+const { app } = Astro.props;
+const hue = app.hue ?? appHue(app.slug);
+const status = app.status ?? "live";
+---
+
+<a
+	class="app-card"
+	href={app.url}
+	target="_blank"
+	rel="noreferrer"
+	aria-label={`${app.name} — ${app.tagline}`}
+	style={`--app-hue: ${hue}`}
+>
+	{
+		app.icon && (
+			<img
+				class="app-icon"
+				src={app.icon}
+				alt=""
+				aria-hidden="true"
+				loading="lazy"
+				decoding="async"
+			/>
+		)
+	}
+
+	<div class="app-body">
+		<div class="app-title-row">
+			<h3>{app.name}</h3>
+			<span class="app-arrow" aria-hidden="true">↗</span>
+		</div>
+		<p>{app.tagline}</p>
+		<div class="app-card-foot">
+			<ul class="tag-list" aria-label="Tags">
+				{app.tags.map((tag) => <li>{tag}</li>)}
+			</ul>
+			<span class:list={["app-status", `is-${status}`]}>{statusLabel(status)}</span>
+		</div>
+	</div>
+</a>

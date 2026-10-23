@@ -1,0 +1,43 @@
+---
+import type { MarkdownHeading } from "astro";
+import I18nKey from "../../i18n/i18nKey";
+import { i18n } from "../../i18n/translation";
+import { siteConfig } from "../../config";
+import Categories from "./Categories.astro";
+import Profile from "./Profile.astro";
+import Tag from "./Tags.astro";
+import TOC from "./TOC.astro";
+import WidgetLayout from "./WidgetLayout.astro";
+
+interface Props {
+	class?: string;
+	headings?: MarkdownHeading[];
+}
+
+const className = Astro.props.class;
+const headings = Astro.props.headings ?? [];
+---
+<div id="sidebar" class:list={[className, "w-full"]}>
+    <div class="flex flex-col w-full gap-4 mb-4">
+        <Profile></Profile>
+    </div>
+    <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4">
+        <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
+        <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
+    </div>
+    {siteConfig.toc.enable ? (
+    <div id="toc-card" class="hidden lg:block sticky top-4 mt-4">
+        <WidgetLayout name={i18n(I18nKey.toc)} nameKey={I18nKey.toc} id="toc-widget" class="onload-animation" style="animation-delay: 250ms">
+            <div id="toc-inner-wrapper" class="max-h-[calc(100vh-12rem)] overflow-y-auto overflow-x-hidden hide-scrollbar">
+                <div id="toc" class="w-full transition-swup-fade">
+                    <div class="h-4 w-full"></div>
+                    <TOC headings={headings}></TOC>
+                    <div class="h-4 w-full"></div>
+                </div>
+            </div>
+        </WidgetLayout>
+    </div>
+    ) : (
+    <div id="toc" class="hidden"></div>
+    )}
+</div>

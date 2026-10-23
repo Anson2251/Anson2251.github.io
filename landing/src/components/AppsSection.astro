@@ -1,0 +1,235 @@
+---
+import AppCard from "./AppCard.astro";
+import AppRow from "./AppRow.astro";
+import { apps } from "../data/apps";
+
+interface Props {
+	mode?: "preview" | "full";
+}
+
+const { mode = "preview" } = Astro.props;
+const isFull = mode === "full";
+
+const ordered = [...apps].sort(
+	(a, b) => Number(Boolean(b.featured)) - Number(Boolean(a.featured)),
+);
+const shown = isFull ? ordered : ordered.filter((app) => app.featured);
+const tags = Array.from(new Set(shown.flatMap((app) => app.tags))).sort((a, b) =>
+	a.localeCompare(b),
+);
+
+const heading = isFull ? "The whole workbench." : "Small things you can poke at.";
+const blurb = isFull
+	? "Calculators, solvers, and browser toys. Filter by tag, or switch to a list for the details."
+	: "Calculators, solvers, and browser toys. A few are finished; a few are still moving.";
+---
+
+<section
+	class:list={[
+		"screen",
+		"apps-screen",
+		isFull && "apps-screen--full",
+		!isFull && "apps-screen--preview",
+	]}
+	aria-labelledby="apps-title"
+	data-apps-index
+>
+	<div class="apps-head">
+		<div class="apps-head-copy" id="apps">
+			<p class="eyebrow">Apps &amp; experiments</p>
+			{
+				isFull ? (
+					<h1 id="apps-title" class="display">{heading}</h1>
+				) : (
+					<h2 id="apps-title" class="display">{heading}</h2>
+				)
+			}
+			<p class="lede">{blurb}</p>
+		</div>
+
+		{
+			isFull && (
+				<div class="view-switch" role="group" aria-label="Layout">
+					<button type="button" data-view="grid" aria-pressed="true">Grid</button>
+					<button type="button" data-view="list" aria-pressed="false">List</button>
+				</div>
+			)
+		}
+	</div>
+
+	{
+		isFull ? (
+			<div class="filter-row" role="group" aria-label="Filter apps">
+				<button class="chip" type="button" data-filter data-kind="all" data-value="all" aria-pressed="true">
+					All
+				</button>
+				<button
+					class="chip"
+					type="button"
+					data-filter
+					data-kind="featured"
+					data-value="featured"
+					aria-pressed="false"
+				>
+					Featured
+				</button>
+				{tags.map((tag) => (
+					<button
+						class="chip"
+						type="button"
+						data-filter
+						data-kind="tag"
+						data-value={tag}
+						aria-pressed="false"
+					>
+						{tag}
+					</button>
+				))}
+			</div>
+		) : (
+			<div class="featured-row">
+				<p class="featured-label">Featured</p>
+				<a class="text-link" href="/apps">
+					See all apps <span aria-hidden="true">→</span>
+				</a>
+			</div>
+		)
+	}
+
+	<div class="apps">
+		{
+			shown.map((app) => (
+				<article
+					class="app-item"
+					data-app
+					data-tags={app.tags.join(",")}
+					data-featured={String(Boolean(app.featured))}
+				>
+					<AppCard app={app} />
+					{isFull && <AppRow app={app} />}
+				</article>
+			))
+		}
+	</div>
+
+	<p class="apps-empty" data-apps-empty hidden>Nothing with that tag yet. Try another one.</p>
+</section>
+
+<script>
+	const root = document.querySelector<HTMLElement>("[data-apps-index]");
+
+	if (root) {
+		const items = Array.from(root.querySelectorAll<HTMLElement>("[data-app]"));
+		const chips = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-filter]"));
+		const empty = root.querySelector<HTMLElement>("[data-apps-empty]");
+		const viewButtons = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-view]"));
+
+		type FilterKind = "all" | "featured" | "tag";
+
+		const applyFilter = (kind: FilterKind, value: string, updateUrl = true) => {
+			let visible = 0;
+
+			for (const item of items) {
+				const tags = (item.dataset.tags ?? "")
+					.split(",")
+					.map((tag) => tag.trim())
+					.filter(Boolean);
+				const featured = item.dataset.featured === "true";
+				const show =
+					kind === "all" ||
+					(kind === "featured" && featured) ||
+					(kind === "tag" && tags.includes(value));
+
+				item.hidden = !show;
+				if (show) visible += 1;
+			}
+
+			for (const chip of chips) {
+				const chipKind = (chip.dataset.kind ?? "all") as FilterKind;
+				const chipValue = chip.dataset.value ?? "all";
+				chip.setAttribute("aria-pressed", String(chipKind === kind && chipValue === value));
+			}
+
+			if (empty) empty.hidden = visible > 0;
+
+			if (updateUrl) {
+				const url = new URL(location.href);
+				if (kind === "all") {
+					url.searchParams.delete("tag");
+				} else {
+					url.searchParams.set("tag", kind === "featured" ? "featured" : value);
+				}
+				history.replaceState({}, "", url);
+			}
+		};
+
+		const params = new URLSearchParams(location.search);
+		const requested = params.get("tag");
+		let initialKind: FilterKind = "all";
+		let initialValue = "all";
+
+		if (requested === "featured") {
+			initialKind = "featured";
+			initialValue = "featured";
+		} else if (requested) {
+			initialKind = "tag";
+			initialValue = requested;
+		}
+
+		const hasInitialChip = chips.some(
+			(chip) =>
+				(chip.dataset.kind ?? "all") === initialKind &&
+				(chip.dataset.value ?? "all") === initialValue,
+		);
+
+		if (!hasInitialChip) {
+			initialKind = "all";
+			initialValue = "all";
+		}
+
+		applyFilter(initialKind, initialValue, false);
+
+		for (const chip of chips) {
+			chip.addEventListener("click", () => {
+				applyFilter(
+					(chip.dataset.kind ?? "all") as FilterKind,
+					chip.dataset.value ?? "all",
+				);
+			});
+		}
+
+		if (viewButtons.length > 0) {
+			const html = document.documentElement;
+
+			const setView = (view: "grid" | "list", updateUrl = true) => {
+				if (view === "list") {
+					html.dataset.appsView = "list";
+				} else {
+					delete html.dataset.appsView;
+				}
+
+				for (const button of viewButtons) {
+					button.setAttribute("aria-pressed", String(button.dataset.view === view));
+				}
+
+				if (updateUrl) {
+					const url = new URL(location.href);
+					if (view === "list") {
+						url.searchParams.set("view", "list");
+					} else {
+						url.searchParams.delete("view");
+					}
+					history.replaceState({}, "", url);
+				}
+			};
+
+			setView(html.dataset.appsView === "list" ? "list" : "grid", false);
+
+			for (const button of viewButtons) {
+				button.addEventListener("click", () =>
+					setView(button.dataset.view === "list" ? "list" : "grid"),
+				);
+			}
+		}
+	}
+</script>

@@ -1,0 +1,76 @@
+---
+import "@fontsource/barlow/400.css";
+import "@fontsource/barlow/500.css";
+import "@fontsource/barlow/700.css";
+import "@fontsource/maple-mono/400.css";
+import "@fontsource/maple-mono/500.css";
+import "@fontsource/maple-mono/700.css";
+import "../styles/global.css";
+
+interface Props {
+	title: string;
+	description: string;
+	path?: string;
+	image?: string;
+}
+
+const {
+	title,
+	description,
+	path = Astro.url.pathname,
+	image = "/images/banner.jpg",
+} = Astro.props;
+
+const canonical = new URL(path, "https://ansonate.ink").toString();
+const ogImage = new URL(image, "https://ansonate.ink").toString();
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content={description} />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="canonical" href={canonical} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="ANSONATE" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={ogImage} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+		<meta name="theme-color" content="#f5f2ea" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0b0d14" media="(prefers-color-scheme: dark)" />
+
+		<title>{title}</title>
+
+		<script is:inline>
+			(() => {
+				const root = document.documentElement;
+				let stored = null;
+				try {
+					stored = localStorage.getItem("theme");
+				} catch {
+					stored = null;
+				}
+				const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+				const dark = stored === "dark" || (stored !== "light" && systemDark);
+				root.classList.toggle("dark", dark);
+				root.style.colorScheme = dark ? "dark" : "light";
+
+				const view = new URLSearchParams(location.search).get("view");
+				if (view === "list") root.dataset.appsView = "list";
+			})();
+		</script>
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<slot />
+	</body>
+</html>

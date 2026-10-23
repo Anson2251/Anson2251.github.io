@@ -1,0 +1,23 @@
+{
+  	"name": "ansonate-landing",
+  	"type": "module",
+  	"version": "0.0.1",
+  	"engines": {
+  	  	"node": ">=22.22.0"
+  	},
+  	"scripts": {
+  	  	"dev": "node scripts/sync-posts.mjs && astro dev",
+  	  	"build": "node scripts/sync-posts.mjs && astro build",
+  	  	"preview": "astro preview",
+  	  	"sync-posts": "node scripts/sync-posts.mjs",
+  	  	"astro": "astro"
+  	},
+  	"dependencies": {
+  	  	"@fontsource/barlow": "^5.3.0",
+  	  	"@fontsource/maple-mono": "^5.3.0",
+  	  	"astro": "^7.4.1"
+  	},
+  	"devDependencies": {
+  	  	"yaml": "2.9.1"
+  	}
+}

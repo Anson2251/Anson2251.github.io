@@ -1,0 +1,19 @@
+---
+import AppsSection from "../components/AppsSection.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import { site } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+	title={`Apps & experiments — ${site.name}`}
+	description={site.appsDescription}
+	path="/apps"
+>
+	<SiteHeader appsPage />
+	<main id="main">
+		<AppsSection mode="full" />
+	</main>
+	<SiteFooter />
+</BaseLayout>

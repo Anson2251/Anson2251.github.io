@@ -1,0 +1,18 @@
+---
+import AppsSection from "../components/AppsSection.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import WritingSection from "../components/WritingSection.astro";
+import { site } from "../data/site";
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title={`${site.name} — ${site.owner}`} description={site.description}>
+	<span id="top"></span>
+	<SiteHeader />
+	<main id="main">
+		<WritingSection />
+		<AppsSection mode="preview" />
+	</main>
+	<SiteFooter />
+</BaseLayout>

@@ -1,0 +1,15 @@
+# Old feed location -> Fuwari feed
+/feed.xml  /rss.xml  301
+
+# Old Jekyll URLs -> Fuwari slugs (static)
+/jekyll/2024/06/24/new-blog-site.html  /posts/new-blog-site/  301
+/credentials/programming/2024/07/27/development-credential-handling-solution.html  /posts/development-credential-handling-solution/  301
+/physics/mathematics/2025/01/18/why-simple-harmonic-motion-can-be-modelled-by-a-reference-circle.html  /posts/why-simple-harmonic-motion-can-be-modelled-by-a-reference-circle/  301
+/mathematics/deep-learning/2026/10/16/desmos-and-calu.html  /posts/desmos-and-calu/  301
+/mathematics/deep-learning/2026/10/16/desmos-and-calu-en.html  /posts/desmos-and-calu-en/  301
+
+# Old URLs whose category segment contains a space. The placeholder matches
+# both the decoded and percent-encoded forms, so these work either way.
+/physics/:category/2025/08/07/a-brief-introduction-on-impedance.html  /posts/a-brief-introduction-on-impedance/  301
+/:category/programming/2026/10/07/htmx-tailwind.html  /posts/htmx-tailwind/  301
+/:category/programming/2026/10/07/htmx-tailwind-en.html  /posts/htmx-tailwind-en/  301

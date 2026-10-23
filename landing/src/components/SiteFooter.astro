@@ -1,0 +1,17 @@
+---
+import { site } from "../data/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="footer-inner">
+		<p>© {year} {site.owner}. Built with Astro.</p>
+		<nav aria-label="Elsewhere">
+			<a href={site.linkedinUrl} target="_blank" rel="noreferrer">LinkedIn ↗</a>
+			<a href={site.githubUrl} target="_blank" rel="noreferrer">GitHub ↗</a>
+			<a href={site.rssUrl} target="_blank" rel="noreferrer">RSS ↗</a>
+			<a href={site.repoUrl} target="_blank" rel="noreferrer">Source ↗</a>
+		</nav>
+	</div>
+</footer>

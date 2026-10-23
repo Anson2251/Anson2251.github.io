@@ -1,0 +1,44 @@
+---
+import { type App, appHue, statusLabel } from "../data/apps";
+
+interface Props {
+	app: App;
+}
+
+const { app } = Astro.props;
+const hue = app.hue ?? appHue(app.slug);
+const status = app.status ?? "live";
+---
+
+<div class:list={["app-row", !app.icon && "app-row--no-icon"]}>
+	{
+		app.icon && (
+			<div class="app-row-cover" style={`--app-hue: ${hue}`} aria-hidden="true">
+				<img
+					class="app-row-icon"
+					src={app.icon}
+					alt=""
+					width="28"
+					height="28"
+					loading="lazy"
+					decoding="async"
+				/>
+			</div>
+		)
+	}
+
+	<div class="app-row-body">
+		<div class="app-row-head">
+			<h3>{app.name}</h3>
+			<span class:list={["app-status", `is-${status}`]}>{statusLabel(status)}</span>
+		</div>
+		<p>{app.description}</p>
+		<ul class="tag-list" aria-label="Tags">
+			{app.tags.map((tag) => <li>{tag}</li>)}
+		</ul>
+	</div>
+
+	<a class="button" href={app.url} target="_blank" rel="noreferrer">
+		Open <span aria-hidden="true">↗</span>
+	</a>
+</div>
