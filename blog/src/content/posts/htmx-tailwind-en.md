@@ -12,7 +12,7 @@ translationKey: "htmx-tailwind"
 
 ---
 
-## 1. A Feeling of Déjà Vu
+## A Feeling of Déjà Vu
 
 Recently I took on a real-time data dashboard. It needs user login, tiered permissions (admins, volunteers, and clients each seeing their own views), a live card grid refreshing every few seconds, and a pile of dense form operations. Sounds like a typical 2026 project.
 
@@ -30,7 +30,7 @@ What this post wants to explain is a design pattern: **why not build an SPA, why
 
 ---
 
-## 2. Why Not Build an SPA
+## Why Not Build an SPA
 
 I don't want to argue "SPAs are bad" — they're not; in many scenarios they're the right answer. My point is: **in this application, I pay twice for every layer of abstraction an SPA brings.**
 
@@ -68,7 +68,7 @@ To be fair, I should be clear about when an SPA is still the right call: offline
 
 ---
 
-## 3. htmx + Template Engine + Tailwind: Why the Trio Works
+## htmx + Template Engine + Tailwind: Why the Trio Works
 
 Looked at alone, none of these three tools is remarkable. Their power comes from the combination.
 
@@ -121,7 +121,7 @@ These ideas aren't mine — Carson Gross's *Hypermedia Systems* and the essays s
 
 ---
 
-## 4. Login and Logout: When a Form Becomes a Real Form Again
+## Login and Logout: When a Form Becomes a Real Form Again
 
 Login is where "traditional Web" and SPA diverge most — and the best illustration of "when to use htmx and when not to."
 
@@ -227,7 +227,7 @@ So this is another place where "back in the traditional-form world, things get e
 
 ---
 
-## 5. Error Handling: htmx's Deepest Pit, and Its Most Valuable Contract
+## Error Handling: htmx's Deepest Pit, and Its Most Valuable Contract
 
 If you take one thing from this post, make it this section. Because htmx error handling hides a deeply counterintuitive pit — one that makes your app **silently fail** at certain moments, with the user seeing only a button that seemingly does nothing. Once you understand the problem, you also understand the most elegant part of this architecture: errors stop being chores scattered across the frontend and become a contract that lives in one function, shared by every endpoint.
 
@@ -374,7 +374,7 @@ This touches the deepest philosophy of the architecture: **keep decisions about 
 
 ---
 
-## 6. Live Updates: SSE Instead of WebSocket
+## Live Updates: SSE Instead of WebSocket
 
 The hardest part of the dashboard is liveness. Cards must refresh every few seconds to reflect data uploaded by on-site devices. The SPA standard answer is WebSocket plus a client rendering layer. Here, the answer is suspiciously simple.
 
@@ -430,7 +430,7 @@ You do have to write a small piece of JavaScript arbitrating between "live pushe
 
 ---
 
-## 7. Islands: When a Chunk of Page Truly Needs to Be "Alive"
+## Islands: When a Chunk of Page Truly Needs to Be "Alive"
 
 By now a reader will ask: all well and good, but what about a genuinely interactive component — a chart with tab switching and live refresh, where clicking a tab swaps datasets and hovering shows tooltips? htmx's partial replacement handles forms and lists, but not "a widget in the browser managing its own state."
 
@@ -497,7 +497,7 @@ The most important judgment is really this: htmx's value was never "refusing Jav
 
 ---
 
-## 8. When This Pattern Is the Right One
+## When This Pattern Is the Right One
 
 I don't want to write this as an htmx hit piece or puff piece. It's a tool; tools belong in the right settings. This checklist is my judgment:
 

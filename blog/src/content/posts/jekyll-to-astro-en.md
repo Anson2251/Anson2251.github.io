@@ -24,7 +24,7 @@ flowchart TD
 
 This post is the full account of the migration: why I left, why I landed on Astro, why the hardest part turned out to be deployment rather than the framework, and everything I did to keep the old links alive. There are two prequels: [in 2024 I wrote about why I chose Jekyll](/posts/new-blog-site/), and [the htmx piece from a few months ago](/posts/htmx-tailwind-en/).
 
-## 1. Three Requirements, One Moment
+## Three Requirements, One Moment
 
 There were three motives for this migration: one push and two pulls.
 
@@ -38,7 +38,7 @@ There's also a cost that isn't a motive but has been accruing interest the whole
 
 The direction was settled long before. When I wrote the htmx post, I spent a whole section on islands architecture and said Astro makes it a first-class citizen: zero JS by default, and only the components that need a runtime get one. A blog that is "content first, interaction on demand," a landing page that is "fully free-form, cut to fit," and a multilingual mechanism that is "static at the base, dynamic in patches" — three requirements pointing at the same framework. Any one of them alone would have produced a different answer. For the landing page alone, I could spin up a new repo and throw anything together. To escape minima alone, I could switch to another theme and keep going with Jekyll. For multilingual content alone, I could grit my teeth and build locally before pushing the output. But all three colliding at once made "one monorepo, one Astro setup, two kinds of output" the only reasonable shape.
 
-## 2. What I Hacked into minima
+## What I Hacked into minima
 
 ### The Two Lines at the Top of Every Post
 
@@ -121,7 +121,7 @@ By this point, "minima isn't enough" no longer explains much. Styles, fonts, mat
 
 Where those things live now is worth a note here; I'll expand later. Fonts became `@fontsource/barlow`, a dependency sitting in `package.json`. Math became `remark-math` plus `rehype-katex`, rendered to HTML at build time, with its version and upgrade path managed by the lockfile. Figures went back to ordinary markdown image syntax, with relative paths resolved and hashed by the build. mermaid is the only thing left at runtime, and even its library still comes from jsdelivr, but the code driving it has moved: initialization, re-rendering, theme switching, and serialization across page changes are all handled by one explicit piece of code in the layout, so when something breaks I can trace it in the source. The runtime didn't disappear; it just moved into the layer where it belongs.
 
-## 3. Why Astro and Fuwari
+## Why Astro and Fuwari
 
 There were three criteria for the migration, ordered by importance.
 
@@ -195,7 +195,7 @@ There's a smaller pit of the same kind: swup treats attachments under `/assets/`
 
 Of course, neither of these bugs has anything to do with "a blog." Both are seams between "SPA-style navigation" and "third-party renderers and real downloads." The theme solves what a page looks like; the seams are always yours. That's what treating a theme as material actually means.
 
-## 4. One Repo, Two Projects, Three Domains
+## One Repo, Two Projects, Three Domains
 
 Choosing the framework was the easiest part of this migration. The hard part was deployment. Why it was hard starts with one small feature on the landing page.
 
@@ -243,7 +243,7 @@ The third domain deserves its own paragraph. Those dozen or so SPA demos are eac
 
 This Pages site publishes from `docs/`, which contains only a single redirect page with `noindex`. Strictly speaking it could hold nothing at all — the demos' survival doesn't depend on what's at the root path — but the root path itself needs somewhere to land, otherwise anyone visiting dev.ansonate.ink directly hits a 404. Now that redirect page sends this small crowd to the gallery at `ansonate.ink/apps`. Nothing old died; it just moved house.
 
-## 5. Wait! Old Links Must Not Die
+## Wait! Old Links Must Not Die
 
 The completion criterion for a migration is that every old URL has somewhere to land, <s>because I put the old links on my résumé</s>. The old site was small, but it had plenty of URL types: eight posts, a feed, an about page, and a dozen demo paths.
 
@@ -272,7 +272,7 @@ Think carefully before you use a 301: browsers and CDNs cache it long-term, so o
 
 `_redirects` also has places it can't reach: it only handles paths, not domains. A domain-level redirect like apps.ansonate.ink to `ansonate.ink/apps` has to be a Redirect Rule written in the Cloudflare dashboard. That's recorded in the landing page's README now, because I'll almost certainly look in the wrong place next time.
 
-## 6. Free Is Not Free
+## Free Is Not Free
 
 This topology isn't free. Here's the bill.
 
@@ -282,7 +282,7 @@ Two lockfiles, two sets of dependabot configs, DNS for the domains. `_redirects`
 
 When does this become over-engineering? If all you need is a blog, GitHub Pages with Jekyll or Hugo is still the least fuss, and the story ends there — right up until you start reshaping the publishing pipeline so another page can read the content.
 
-## 7. Closing
+## Closing
 
 In that announcement post from 2024, I wrote that Jekyll fit my preferences perfectly. That was true at the time, and it isn't exactly wrong now; the context just changed. Over two years my usage grew into the shape of a theme: a landing page, a set of reusable components, a bilingual convention — while the tool stayed where it was. Jekyll didn't get worse. My demands on it changed.
 
@@ -303,4 +303,3 @@ For anyone about to do the same thing, in order:
 7. Separate validation from deployment: CI only validates, deployment is triggered by the host on push, but accept that "green light doesn't mean live."
 8. Redirects: 302 first, 301 later. Use placeholders for old paths with spaces, and test both encoded forms.
 9. Learn `_redirects`' limits: it doesn't handle domains, there's a cap on rule count, and domain-level redirects go in the dashboard.
-10. Every time you publish a post, run through the table from step 1.
