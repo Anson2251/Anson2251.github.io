@@ -6,9 +6,9 @@
 // SITE_LANG_EVENT instead. Post bodies, bios and other author content are
 // never touched.
 
+import type I18nKey from "@i18n/i18nKey";
 import { en } from "@i18n/languages/en";
 import { zh_CN } from "@i18n/languages/zh_CN";
-import type I18nKey from "@i18n/i18nKey";
 
 export type SiteLang = "en" | "zh";
 
@@ -45,7 +45,9 @@ export function setSiteLangPref(lang: SiteLang): void {
 }
 
 export function t(key: I18nKey | string, lang: SiteLang): string {
-	return dicts[lang][key as string] ?? dicts.en[key as string] ?? (key as string);
+	return (
+		dicts[lang][key as string] ?? dicts.en[key as string] ?? (key as string)
+	);
 }
 
 // Twin-post label depends on both the chrome language and the twin's language.

@@ -49,6 +49,7 @@ Listings (home, archive) collapse twins: with the default English preference onl
 
 - `src/plugins/remark-mermaid.mjs`: converts ```` ```mermaid ```` fences into plain `<pre>` blocks before syntax highlighting sees them, and the layout renders them with Mermaid loaded from CDN. The diagram theme follows Fuwari's light/dark mode and re-renders when it flips. Nothing is fetched on pages without diagrams.
 - `public/_redirects`: maps the old Jekyll URLs (category and date segments, `.html` suffix) to current slugs, plus `/feed.xml` to `/rss.xml`.
+- `src/plugins/rehype-component-link-card.mjs`: `::card{url="https://example.com" site="GitHub" title="repo-name" desc="One line."}` renders a server-side link card for any URL. Unlike `::github{repo="owner/repo"}`, it makes no request to `api.github.com`, so it works for private repos and non-GitHub hosts.
 - Post images get a white rounded card in `src/styles/markdown.css` so transparent-background diagrams stay readable in dark mode.
 
 ## License

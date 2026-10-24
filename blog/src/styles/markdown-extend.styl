@@ -243,3 +243,63 @@ a.card-github.fetch-error
   transition-property: all
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
   transition-duration: 0.15s
+
+a.card-link
+  display: block
+  background: var(--license-block-bg)
+  position: relative
+  margin: 0.5rem 0
+  padding: 1.1rem 1.5rem
+  color: var(--tw-prose-body)
+  border-radius: var(--radius-large)
+  text-decoration: none
+  transition-property: background-color, scale
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1)
+  transition-duration: 0.15s
+
+  &:hover
+    background-color: var(--btn-regular-bg-hover)
+
+    .lc-title
+      color: var(--btn-content)
+
+  &:active
+    scale: .98
+    background-color: var(--btn-regular-bg-active)
+
+  .lc-titlebar
+    display: flex
+    align-items: center
+    justify-content: space-between
+    gap: 0.75rem
+    margin-bottom: 0.4rem
+    font-size: 0.875rem
+    font-weight: 500
+    opacity: 0.8
+
+  .lc-site
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  .lc-icon
+    flex-shrink: 0
+    height: 1.1rem
+    width: 1.1rem
+    background-color: var(--tw-prose-headings)
+    mask-size: contain
+    mask-position: center
+    mask-repeat: no-repeat
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' height='16' viewBox='0 0 16 16' width='16'%3E%3Cpath d='M3.75 2h3.5a.75.75 0 0 1 0 1.5h-3.5a.25.25 0 0 0-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 0 0 .25-.25v-3.5a.75.75 0 0 1 1.5 0v3.5A1.75 1.75 0 0 1 12.25 14h-8.5A1.75 1.75 0 0 1 2 12.25v-8.5C2 2.784 2.784 2 3.75 2Zm6.5-1h4.5a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0V3.56L9.28 8.28a.751.751 0 0 1-1.06-1.06L12.94 2.5h-2.69a.75.75 0 0 1 0-1.5Z'/%3E%3C/svg%3E")
+
+  .lc-title
+    color: var(--tw-prose-headings)
+    font-size: 1.15rem
+    font-weight: 500
+    line-height: 1.5rem
+
+  .lc-description
+    margin-top: 0.4rem
+    font-size: 0.9rem
+    font-weight: 300
+    line-height: 1.4rem

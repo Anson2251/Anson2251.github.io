@@ -38,6 +38,7 @@ export const id: Translation = {
 	[Key.license]: "Lisensi",
 
 	[Key.notFoundTitle]: "Halaman tidak ditemukan",
-	[Key.notFoundDescription]: "Halaman yang Anda cari tidak ada atau telah dipindahkan.",
+	[Key.notFoundDescription]:
+		"Halaman yang Anda cari tidak ada atau telah dipindahkan.",
 	[Key.backHome]: "Kembali ke beranda",
 };

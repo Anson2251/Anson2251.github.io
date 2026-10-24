@@ -1,13 +1,13 @@
 <script lang="ts">
 import I18nKey from "@i18n/i18nKey";
 import Icon from "@iconify/svelte";
-import { url } from "@utils/url-utils.ts";
 import {
-	SITE_LANG_EVENT,
 	getSiteLangPref,
-	t,
+	SITE_LANG_EVENT,
 	type SiteLang,
+	t,
 } from "@utils/site-lang";
+import { url } from "@utils/url-utils.ts";
 import { onMount } from "svelte";
 import type { SearchResult } from "@/global";
 

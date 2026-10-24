@@ -3,10 +3,10 @@ import I18nKey from "@i18n/i18nKey";
 import Icon from "@iconify/svelte";
 import { getDefaultHue, getHue, setHue } from "@utils/setting-utils";
 import {
-	SITE_LANG_EVENT,
 	getSiteLangPref,
-	t,
+	SITE_LANG_EVENT,
 	type SiteLang,
+	t,
 } from "@utils/site-lang";
 import { onMount } from "svelte";
 

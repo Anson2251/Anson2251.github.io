@@ -3,16 +3,16 @@ import { onMount } from "svelte";
 
 import I18nKey from "../i18n/i18nKey";
 import {
-	POST_LANG_EVENT,
 	filterPostsByLang,
 	getPostLangPref,
+	POST_LANG_EVENT,
 	type PostLangPref,
 } from "../utils/post-lang";
 import {
-	SITE_LANG_EVENT,
 	getSiteLangPref,
-	t,
+	SITE_LANG_EVENT,
 	type SiteLang,
+	t,
 } from "../utils/site-lang";
 import { getPostUrlBySlug } from "../utils/url-utils";
 

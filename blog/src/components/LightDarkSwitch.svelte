@@ -3,16 +3,16 @@ import { AUTO_MODE, DARK_MODE, LIGHT_MODE } from "@constants/constants.ts";
 import I18nKey from "@i18n/i18nKey";
 import Icon from "@iconify/svelte";
 import {
-	SITE_LANG_EVENT,
-	getSiteLangPref,
-	t,
-	type SiteLang,
-} from "@utils/site-lang";
-import {
 	applyThemeToDocument,
 	getStoredTheme,
 	setTheme,
 } from "@utils/setting-utils.ts";
+import {
+	getSiteLangPref,
+	SITE_LANG_EVENT,
+	type SiteLang,
+	t,
+} from "@utils/site-lang";
 import { onMount } from "svelte";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 

@@ -38,6 +38,7 @@ export const en: Translation = {
 	[Key.license]: "License",
 
 	[Key.notFoundTitle]: "Page not found",
-	[Key.notFoundDescription]: "The page you're looking for doesn't exist or has moved.",
+	[Key.notFoundDescription]:
+		"The page you're looking for doesn't exist or has moved.",
 	[Key.backHome]: "Back home",
 };

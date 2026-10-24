@@ -38,7 +38,10 @@ export function setPostLangPref(pref: PostLangPref): void {
 	// document-level listeners. bubbles:true lets the event bubble back up to
 	// window listeners too, so both styles stay in sync.
 	document.dispatchEvent(
-		new CustomEvent<PostLangPref>(POST_LANG_EVENT, { detail: pref, bubbles: true }),
+		new CustomEvent<PostLangPref>(POST_LANG_EVENT, {
+			detail: pref,
+			bubbles: true,
+		}),
 	);
 }
 
@@ -49,7 +52,10 @@ type PostLike = {
 // Collapse translation twins to the preferred language, preserving order.
 // Posts without a translationKey always show. When a group has no version
 // in the preferred language, its first listed version shows as fallback.
-export function filterPostsByLang<T extends PostLike>(posts: T[], pref: PostLangPref): T[] {
+export function filterPostsByLang<T extends PostLike>(
+	posts: T[],
+	pref: PostLangPref,
+): T[] {
 	if (pref === "all") return posts;
 	const best = new Map<string, number>();
 	posts.forEach((p, i) => {

@@ -57,7 +57,10 @@ const langEntries = await getSortedPosts();
 const langChain = langEntries.filter((e) => normLang(e.data.lang) === myLang);
 const langIndex = langChain.findIndex((e) => e.slug === entry.slug);
 const nextEntry = langIndex > 0 ? langChain[langIndex - 1] : undefined;
-const prevEntry = langIndex >= 0 && langIndex < langChain.length - 1 ? langChain[langIndex + 1] : undefined;
+const prevEntry =
+	langIndex >= 0 && langIndex < langChain.length - 1
+		? langChain[langIndex + 1]
+		: undefined;
 
 const jsonLd = {
 	"@context": "https://schema.org",
