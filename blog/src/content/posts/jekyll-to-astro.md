@@ -3,7 +3,7 @@ title: "租来的主题，自己的站：把小窝从 Jekyll 搬到 Astro"
 published: 2026-10-23
 description: "为什么离开 minima，为什么落在 Astro：landing、多语言，以及把一个站点拆成 monorepo、两个 project、三个域名时发生的事。"
 tags: ["Astro", "Jekyll", "Cloudflare"]
-category: "Blog"
+category: "Changelog"
 lang: zh_CN
 translationKey: "jekyll-to-astro"
 draft: false

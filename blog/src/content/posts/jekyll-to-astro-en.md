@@ -3,7 +3,7 @@ title: "A Rented Theme, a Site of My Own: Moving My Little Home from Jekyll to A
 published: 2026-10-23
 description: "Why I left minima and why I landed on Astro: a landing page, multilingual content, and what happens when you split one site into a monorepo, two projects, and three domains."
 tags: ["Astro", "Jekyll", "Cloudflare"]
-category: "Blog"
+category: "Changelog"
 lang: en
 translationKey: "jekyll-to-astro"
 ---

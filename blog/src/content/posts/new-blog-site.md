@@ -3,7 +3,7 @@ title: "New Blog Site!"
 published: 2024-06-24
 description: "Announcing the new blog and the plan to turn old project pages into posts."
 tags: ["Jekyll"]
-category: "Blog"
+category: "Changelog"
 lang: en
 ---
 
