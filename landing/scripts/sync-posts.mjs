@@ -12,7 +12,7 @@ import { parse } from "yaml";
 const RECENT_COUNT = 5;
 const EXCLUDE_TAGS = [];
 
-const BLOG_ORIGIN = "https://blogs.ansonate.ink";
+const BLOG_ORIGIN = "https://blog.ansonate.ink";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const postsDir = path.resolve(root, "../blog/src/content/posts");
 const outFile = path.resolve(root, "src/data/posts.json");

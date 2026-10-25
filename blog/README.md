@@ -1,6 +1,6 @@
 # Anson2251's Blog
 
-Personal blog built with [Astro](https://astro.build) using the [Fuwari](https://github.com/saicaca/fuwari) theme. Deployed on Cloudflare Pages at [blogs.ansonate.ink](https://blogs.ansonate.ink). The landing page at [ansonate.ink](https://ansonate.ink) lives in `landing/` in the same repository.
+Personal blog built with [Astro](https://astro.build) using the [Fuwari](https://github.com/saicaca/fuwari) theme. Deployed on Cloudflare Pages at [blog.ansonate.ink](https://blog.ansonate.ink). The landing page at [ansonate.ink](https://ansonate.ink) lives in `landing/` in the same repository.
 
 ## Local development
 

@@ -8,7 +8,7 @@ lang: en
 translationKey: "jekyll-to-astro"
 ---
 
-If you open ansonate.ink right now, what you see is no longer a bare index of blog posts but a landing page: the five most recent posts, a gallery of apps, and a badge that says I'm looking for a co-op. The blog itself has moved to blogs.ansonate.ink, and the dozen or so SPA demos I've accumulated over the years hang off dev.ansonate.ink. Behind those three domains are two Astro projects in one monorepo, plus a GitHub Pages site that exists only to host old things.
+If you open ansonate.ink right now, what you see is no longer a bare index of blog posts but a landing page: the five most recent posts, a gallery of apps, and a badge that says I'm looking for a co-op. The blog itself has moved to blog.ansonate.ink, and the dozen or so SPA demos I've accumulated over the years hang off dev.ansonate.ink. Behind those three domains are two Astro projects in one monorepo, plus a GitHub Pages site that exists only to host old things.
 
 ```mermaid
 flowchart TD
@@ -16,7 +16,7 @@ flowchart TD
     R --> L["landing/<br/>Astro, zero client JS"]
     R --> B["blog/<br/>Astro (Fuwari)"]
     L --> A["ansonate.ink"]
-    B --> D["blogs.ansonate.ink"]
+    B --> D["blog.ansonate.ink"]
     O["Old demo repos"] --> E["dev.ansonate.ink<br/>GitHub Pages"]
     A -.-> D
     A -.-> E
@@ -225,7 +225,7 @@ flowchart LR
     W --> L["project: landing<br/>root landing/"]
     W --> B["project: blog<br/>root blog/"]
     L --> A["ansonate.ink"]
-    B --> D["blogs.ansonate.ink"]
+    B --> D["blog.ansonate.ink"]
     G["GitHub Pages<br/>source docs/"] --> E["dev.ansonate.ink"]
 ```
 
@@ -236,7 +236,7 @@ The division of domains:
 | Domain | Points to | Hosting |
 |---|---|---|
 | ansonate.ink | landing | Cloudflare Pages |
-| blogs.ansonate.ink | blog | Cloudflare Pages |
+| blog.ansonate.ink | blog | Cloudflare Pages |
 | dev.ansonate.ink | old demo repos | GitHub Pages |
 
 The third domain deserves its own paragraph. Those dozen or so SPA demos are each their own repo, each with GitHub Pages enabled. GitHub has a handy mechanism: once a user site has a custom domain configured (with DNS pointed at GitHub Pages first), project sites under the same account hang off subpaths of that domain by default. So the user-site repo claims dev.ansonate.ink; every demo can live on as `dev.ansonate.ink/<repo>/`, and old links from the main site get 301'd there.
@@ -256,7 +256,7 @@ Posts first. Jekyll's default permalink is `/:categories/:year/:month/:day/:titl
 The categories were whatever I felt like, and some contain spaces ("Web Development" on the htmx post). The browser actually requests the `%20`-encoded form. Cloudflare Pages' `_redirects` supports placeholders, so one rule matches both the decoded and the encoded form:
 
 ```
-/:category/programming/2026/10/07/htmx-tailwind.html  https://blogs.ansonate.ink/posts/htmx-tailwind/  301
+/:category/programming/2026/10/07/htmx-tailwind.html  https://blog.ansonate.ink/posts/htmx-tailwind/  301
 ```
 
 There are two copies of `_redirects`, because rules apply per project: the apex project can't see the blog's rules, and vice versa. The apex copy (`landing/public/_redirects`) uses absolute URLs: old posts and the feed 301 across domains to the blogs subdomain, and demo paths 301 to the dev subdomain. The blog copy (`blog/public/_redirects`) uses site-relative paths, catching old links that hit the blog domain directly. The feed is a separate line: jekyll-feed produced `/feed.xml`, and on the Astro side it's `/rss.xml`.

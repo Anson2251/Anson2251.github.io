@@ -1,19 +1,19 @@
 # Old Jekyll index pages (apex) -> new equivalents
-/feed.xml  https://blogs.ansonate.ink/rss.xml  301
-/about/  https://blogs.ansonate.ink/about/  301
+/feed.xml  https://blog.ansonate.ink/rss.xml  301
+/about/  https://blog.ansonate.ink/about/  301
 
 # Old Jekyll URLs (apex) -> new blog URLs (subdomain). Absolute destinations.
-/jekyll/2024/06/24/new-blog-site.html  https://blogs.ansonate.ink/posts/new-blog-site/  301
-/credentials/programming/2024/07/27/development-credential-handling-solution.html  https://blogs.ansonate.ink/posts/development-credential-handling-solution/  301
-/physics/mathematics/2025/01/18/why-simple-harmonic-motion-can-be-modelled-by-a-reference-circle.html  https://blogs.ansonate.ink/posts/why-simple-harmonic-motion-can-be-modelled-by-a-reference-circle/  301
-/mathematics/deep-learning/2026/10/16/desmos-and-calu.html  https://blogs.ansonate.ink/posts/desmos-and-calu/  301
-/mathematics/deep-learning/2026/10/16/desmos-and-calu-en.html  https://blogs.ansonate.ink/posts/desmos-and-calu-en/  301
+/jekyll/2024/06/24/new-blog-site.html  https://blog.ansonate.ink/posts/new-blog-site/  301
+/credentials/programming/2024/07/27/development-credential-handling-solution.html  https://blog.ansonate.ink/posts/development-credential-handling-solution/  301
+/physics/mathematics/2025/01/18/why-simple-harmonic-motion-can-be-modelled-by-a-reference-circle.html  https://blog.ansonate.ink/posts/why-simple-harmonic-motion-can-be-modelled-by-a-reference-circle/  301
+/mathematics/deep-learning/2026/10/16/desmos-and-calu.html  https://blog.ansonate.ink/posts/desmos-and-calu/  301
+/mathematics/deep-learning/2026/10/16/desmos-and-calu-en.html  https://blog.ansonate.ink/posts/desmos-and-calu-en/  301
 
 # Old URLs whose category segment contains a space. The placeholder matches
 # both the decoded and percent-encoded forms, so these work either way.
-/physics/:category/2025/08/07/a-brief-introduction-on-impedance.html  https://blogs.ansonate.ink/posts/a-brief-introduction-on-impedance/  301
-/:category/programming/2026/10/07/htmx-tailwind.html  https://blogs.ansonate.ink/posts/htmx-tailwind/  301
-/:category/programming/2026/10/07/htmx-tailwind-en.html  https://blogs.ansonate.ink/posts/htmx-tailwind-en/  301
+/physics/:category/2025/08/07/a-brief-introduction-on-impedance.html  https://blog.ansonate.ink/posts/a-brief-introduction-on-impedance/  301
+/:category/programming/2026/10/07/htmx-tailwind.html  https://blog.ansonate.ink/posts/htmx-tailwind/  301
+/:category/programming/2026/10/07/htmx-tailwind-en.html  https://blog.ansonate.ink/posts/htmx-tailwind-en/  301
 
 # Old app paths (apex) -> GitHub Pages apps host
 /resume-tailor/*  https://dev.ansonate.ink/resume-tailor/:splat  301

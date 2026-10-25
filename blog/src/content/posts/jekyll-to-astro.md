@@ -9,7 +9,7 @@ translationKey: "jekyll-to-astro"
 draft: false
 ---
 
-如果你现在打开 ansonate.ink，看到的不再是简陋的博客文章索引，而是一个 landing：最近更新的五篇文章、一个 apps 画廊、一个写着我找 coop 的 bage。博客本体搬到了 blogs.ansonate.ink，这些年攒下的十几个 SPA demo 挂在 dev.ansonate.ink。三个域名背后，是一个 monorepo 里的两个 Astro 项目，外加一个只用来托管旧物的 GitHub Pages。
+如果你现在打开 ansonate.ink，看到的不再是简陋的博客文章索引，而是一个 landing：最近更新的五篇文章、一个 apps 画廊、一个写着我找 coop 的 bage。博客本体搬到了 blog.ansonate.ink，这些年攒下的十几个 SPA demo 挂在 dev.ansonate.ink。三个域名背后，是一个 monorepo 里的两个 Astro 项目，外加一个只用来托管旧物的 GitHub Pages。
 
 ```mermaid
 flowchart TD
@@ -17,7 +17,7 @@ flowchart TD
     R --> L["landing/<br/>Astro，零客户端 JS"]
     R --> B["blog/<br/>Astro（Fuwari）"]
     L --> A["ansonate.ink"]
-    B --> D["blogs.ansonate.ink"]
+    B --> D["blog.ansonate.ink"]
     O["旧 demo 项目群"] --> E["dev.ansonate.ink<br/>GitHub Pages"]
     A -.-> D
     A -.-> E
@@ -226,7 +226,7 @@ flowchart LR
     W --> L["project: landing<br/>根目录 landing/"]
     W --> B["project: blog<br/>根目录 blog/"]
     L --> A["ansonate.ink"]
-    B --> D["blogs.ansonate.ink"]
+    B --> D["blog.ansonate.ink"]
     G["GitHub Pages<br/>发布源 docs/"] --> E["dev.ansonate.ink"]
 ```
 
@@ -237,7 +237,7 @@ flowchart LR
 | 域名 | 指向 | 托管 |
 |---|---|---|
 | ansonate.ink | landing | Cloudflare Pages |
-| blogs.ansonate.ink | blog | Cloudflare Pages |
+| blog.ansonate.ink | blog | Cloudflare Pages |
 | dev.ansonate.ink | 旧 demo 项目群 | GitHub Pages |
 
 第三个域名值得单独说。那十几个 SPA demo 各自是独立仓库，各自开着 GitHub Pages。GitHub 有个顺手的机制：用户站配了自定义域名（先配好 DNS 解析到 GitHub Pages）之后，同账号的项目站默认挂在这个域名的子路径下，所以这个仓库的 Pages 占住 dev.ansonate.ink，所有 demo 就都能以 `dev.ansonate.ink/<repo>/` 的形式活着，主站的旧链接用 301 指过去。
@@ -257,7 +257,7 @@ flowchart LR
 category 是我自由发挥的，其中有带空格的（htmx 那篇的 "Web Development"），浏览器实际请求的是 `%20` 编码后的形态。Cloudflare Pages 的 `_redirects` 支持占位符，一条规则同时匹配解码和编码两种形态：
 
 ```
-/:category/programming/2026/10/07/htmx-tailwind.html  https://blogs.ansonate.ink/posts/htmx-tailwind/  301
+/:category/programming/2026/10/07/htmx-tailwind.html  https://blog.ansonate.ink/posts/htmx-tailwind/  301
 ```
 
 `_redirects` 有两份，因为规则按 project 生效，apex 的 project 看不到 blogs 的规则，反过来也一样。apex 那份（`landing/public/_redirects`）用绝对地址干活：旧文章和 feed 跨域 301 到 blogs 子域，demo 路径 301 到 dev 子域。blogs 那份（`blog/public/_redirects`）用站内相对路径，接住直接撞在博客域名上的旧链接。feed 单独一行：jekyll-feed 的产物是 `/feed.xml`，Astro 这边是 `/rss.xml`。

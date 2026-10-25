@@ -1,11 +1,11 @@
 # Anson2251.github.io
 
-Source for [ansonate.ink](https://ansonate.ink) and [blogs.ansonate.ink](https://blogs.ansonate.ink).
+Source for [ansonate.ink](https://ansonate.ink) and [blog.ansonate.ink](https://blog.ansonate.ink).
 
 | Directory | Content | Domain |
 |:----------|:--------|:-------|
 | `landing/` | Landing page, plain Astro | `ansonate.ink` |
-| `blog/` | Blog, Astro with the Fuwari theme | `blogs.ansonate.ink` |
+| `blog/` | Blog, Astro with the Fuwari theme | `blog.ansonate.ink` |
 
 Each directory is its own Cloudflare Pages project with its own build (`pnpm build` to `dist/`). See `blog/README.md` for the blog's frontmatter, translations and differences from stock Fuwari, and `landing/README.md` for the landing page data files.
 
