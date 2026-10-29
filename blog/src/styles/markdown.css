@@ -123,8 +123,13 @@
 
 /* Center content images (replaces the old centered-figure include).
    Diagrams have transparent backgrounds, so give them a white card
-   to stay readable in dark mode. */
+   to stay readable in dark mode.  Cap the width so screenshots of
+   different resolutions render at a consistent size. */
 .custom-md img {
+    display: block;
+    width: 100%;
+    max-width: 42rem;
+    height: auto;
     margin-inline: auto;
     background-color: #fff;
     border-radius: 0.75rem;
