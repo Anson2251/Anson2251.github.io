@@ -6,7 +6,7 @@ tags: ["Windows 2000", "QEMU", "UTM"]
 category: "Retrocomputing"
 lang: zh_CN
 translationKey: "windows-2000-on-utm"
-draft: true
+draft: false
 ---
 
 SolidWorks 我早就想装回 Mac 上，一直拖着。新版在 Wine 里根本起不来，翻 archive.org 才找到 SolidWorks 2000 的安装包，下下来又发现它的安装向导里套着一个 16 位程序。macOS 上的 Wine 从苹果砍掉 32 位支持那天起就跑不了 16 位代码，这条路堵死了，剩下的选择只有虚拟机。

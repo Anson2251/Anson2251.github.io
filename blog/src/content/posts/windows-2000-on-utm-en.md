@@ -6,7 +6,7 @@ tags: ["Windows 2000", "QEMU", "UTM"]
 category: "Retrocomputing"
 lang: en
 translationKey: "windows-2000-on-utm"
-draft: true
+draft: false
 ---
 
 I'd meant to get SolidWorks back onto this Mac for a long time, and kept putting it off. The new version won't even start under Wine, so I dug through archive.org until I found the SolidWorks 2000 installers — and then discovered that its setup wizard wraps a 16-bit program. Wine on macOS hasn't been able to run 16-bit code since the day Apple dropped 32-bit support, so that road was closed. The only option left was a virtual machine.
