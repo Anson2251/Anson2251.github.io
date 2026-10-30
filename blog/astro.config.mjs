@@ -108,7 +108,9 @@ export default defineConfig({
 			}
 		}),
         svelte(),
-		sitemap(),
+		sitemap({
+			filter: (page) => !page.includes("/404"),
+		}),
 	],
 	markdown: {
 		remarkPlugins: [

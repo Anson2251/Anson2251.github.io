@@ -1,0 +1,79 @@
+name: Deploy dev site to GitHub Pages
+
+# Publishes docs/ (redirect stub, robots.txt, CNAME) plus a freshly
+# generated sitemap.xml to the gh-pages branch, which is what
+# dev.ansonate.ink is served from. The sitemap is a build artifact and
+# is not tracked on main.
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+    paths:
+      - "landing/src/data/apps.ts"
+      - "landing/scripts/sync-dev-sitemap.mjs"
+      - "docs/**"
+      - ".github/workflows/dev-pages-deploy.yml"
+
+  # Validates the generator on PRs without deploying
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "landing/src/data/apps.ts"
+      - "landing/scripts/sync-dev-sitemap.mjs"
+      - ".github/workflows/dev-pages-deploy.yml"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    # PRs only validate the generator; only main (and manual runs) deploy
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Generate sitemap
+        # No install step: the script uses Node builtins plus landing's app data
+        run: node landing/scripts/sync-dev-sitemap.mjs
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs
+          clean: true
+
+  validate:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Generate sitemap
+        run: node landing/scripts/sync-dev-sitemap.mjs
