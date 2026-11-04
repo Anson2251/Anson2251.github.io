@@ -51,18 +51,51 @@ export type Tag = {
 	count: number;
 };
 
+type CountablePost = {
+	data: {
+		tags?: string[];
+		category?: string | null;
+		translationKey?: string | null;
+	};
+};
+
+// Translation twins are the same post, so they must only be counted once.
+// Group by `translationKey` and merge their tags and categories; posts without
+// a key are their own group.
+function groupTranslationTwins(posts: CountablePost[]) {
+	const groups = new Map<
+		string,
+		{ tags: Set<string>; categories: Set<string> }
+	>();
+	posts.forEach((post, index) => {
+		const key = post.data.translationKey || `#${index}`;
+		let group = groups.get(key);
+		if (!group) {
+			group = { tags: new Set(), categories: new Set() };
+			groups.set(key, group);
+		}
+		for (const tag of post.data.tags ?? []) {
+			const name = tag.trim();
+			if (name) group.tags.add(name);
+		}
+		if (post.data.category) {
+			group.categories.add(post.data.category.trim());
+		}
+	});
+	return groups.values();
+}
+
 export async function getTagList(): Promise<Tag[]> {
 	const allBlogPosts = await getCollection<"posts">("posts", ({ data }) => {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
 
 	const countMap: { [key: string]: number } = {};
-	allBlogPosts.forEach((post: { data: { tags: string[] } }) => {
-		post.data.tags.forEach((tag: string) => {
-			if (!countMap[tag]) countMap[tag] = 0;
-			countMap[tag]++;
-		});
-	});
+	for (const group of groupTranslationTwins(allBlogPosts)) {
+		for (const tag of group.tags) {
+			countMap[tag] = countMap[tag] ? countMap[tag] + 1 : 1;
+		}
+	}
 
 	// sort tags
 	const keys: string[] = Object.keys(countMap).sort((a, b) => {
@@ -83,20 +116,19 @@ export async function getCategoryList(): Promise<Category[]> {
 		return import.meta.env.PROD ? data.draft !== true : true;
 	});
 	const count: { [key: string]: number } = {};
-	allBlogPosts.forEach((post: { data: { category: string | null } }) => {
-		if (!post.data.category) {
+	for (const group of groupTranslationTwins(allBlogPosts)) {
+		if (group.categories.size === 0) {
 			const ucKey = i18n(I18nKey.uncategorized);
 			count[ucKey] = count[ucKey] ? count[ucKey] + 1 : 1;
-			return;
+			continue;
 		}
 
-		const categoryName =
-			typeof post.data.category === "string"
-				? post.data.category.trim()
-				: String(post.data.category).trim();
-
-		count[categoryName] = count[categoryName] ? count[categoryName] + 1 : 1;
-	});
+		for (const categoryName of group.categories) {
+			count[categoryName] = count[categoryName]
+				? count[categoryName] + 1
+				: 1;
+		}
+	}
 
 	const lst = Object.keys(count).sort((a, b) => {
 		return a.toLowerCase().localeCompare(b.toLowerCase());
