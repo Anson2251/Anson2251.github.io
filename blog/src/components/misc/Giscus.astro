@@ -1,0 +1,162 @@
+---
+import I18nKey from "@i18n/i18nKey";
+import { getTranslation } from "@i18n/translation";
+import { Icon } from "astro-icon/components";
+import { giscusConfig, siteConfig } from "../../config";
+
+interface Props {
+	lang?: string;
+	class?: string;
+}
+
+const { lang, class: className = "" } = Astro.props;
+const conf = giscusConfig;
+
+// giscus needs both a repo id and a category id. Keep the section out of the
+// page entirely until the repo has Discussions enabled and the app installed.
+const enabled = !!(conf.enable && conf.repo && conf.repoId && conf.categoryId);
+
+const postLang = lang || siteConfig.lang;
+const t = getTranslation(postLang);
+// giscus expects tags like `zh-CN`, while the blog stores `zh_CN`.
+const giscusLang = postLang.replace("_", "-");
+---
+
+{enabled && (
+	<section
+		id="giscus-section"
+		class:list={["mt-8 mb-4", className]}
+		aria-labelledby="comments-title"
+		data-pagefind-ignore
+	>
+		<h2
+			id="comments-title"
+			class="flex items-center gap-2 font-bold text-black/75 dark:text-white/75 mb-4"
+		>
+			<Icon
+				name="material-symbols:forum-outline-rounded"
+				class="text-[1.25rem] text-[var(--primary)]"
+			/>
+			{t[I18nKey.comments]}
+		</h2>
+		<div
+			id="giscus-container"
+			data-repo={conf.repo}
+			data-repo-id={conf.repoId}
+			data-category={conf.category}
+			data-category-id={conf.categoryId}
+			data-mapping={conf.mapping}
+			data-strict={conf.strict ? "1" : "0"}
+			data-reactions-enabled={conf.reactionsEnabled ? "1" : "0"}
+			data-input-position={conf.inputPosition}
+			data-lang={giscusLang}
+		>
+		</div>
+	</section>
+)}
+
+<script>
+	// giscus loads into a container that Swup replaces on every navigation, so
+	// the widget has to be mounted again for each post. Keep the one-time setup
+	// on `window` because Swup re-executes this module after every page swap.
+	const GISCUS_ORIGIN = "https://giscus.app";
+
+	interface GiscusRuntime {
+		hooked: boolean;
+		observed: boolean;
+		lastTheme: string;
+	}
+
+	const runtime: GiscusRuntime = ((
+		window as unknown as { __giscusRuntime?: GiscusRuntime }
+	).__giscusRuntime ??= { hooked: false, observed: false, lastTheme: "" });
+
+	// giscus has no "follow the site" option for a custom dark class, so pick a
+	// theme that matches the card background and keep it in sync by hand.
+	function giscusTheme(): string {
+		return document.documentElement.classList.contains("dark")
+			? "dark_dimmed"
+			: "light";
+	}
+
+	function mountGiscus(): void {
+		const container = document.querySelector<HTMLElement>("#giscus-container");
+		// Skip if the section is disabled or this container was already mounted.
+		if (!container || container.dataset.giscusMounted === "true") return;
+
+		const theme = giscusTheme();
+		runtime.lastTheme = theme;
+		container.dataset.giscusMounted = "true";
+
+		const script = document.createElement("script");
+		script.src = `${GISCUS_ORIGIN}/client.js`;
+		script.async = true;
+		script.crossOrigin = "anonymous";
+		script.setAttribute("data-repo", container.dataset.repo ?? "");
+		script.setAttribute("data-repo-id", container.dataset.repoId ?? "");
+		script.setAttribute("data-category", container.dataset.category ?? "");
+		script.setAttribute(
+			"data-category-id",
+			container.dataset.categoryId ?? "",
+		);
+		script.setAttribute(
+			"data-mapping",
+			container.dataset.mapping ?? "pathname",
+		);
+		script.setAttribute("data-strict", container.dataset.strict ?? "0");
+		script.setAttribute(
+			"data-reactions-enabled",
+			container.dataset.reactionsEnabled ?? "1",
+		);
+		script.setAttribute("data-emit-metadata", "0");
+		script.setAttribute(
+			"data-input-position",
+			container.dataset.inputPosition ?? "bottom",
+		);
+		script.setAttribute("data-lang", container.dataset.lang ?? "en");
+		script.setAttribute("data-theme", theme);
+		script.setAttribute("data-loading", "lazy");
+		container.appendChild(script);
+	}
+
+	function syncGiscusTheme(): void {
+		const theme = giscusTheme();
+		if (theme === runtime.lastTheme) return;
+		runtime.lastTheme = theme;
+		for (const frame of document.querySelectorAll<HTMLIFrameElement>(
+			"iframe.giscus-frame",
+		)) {
+			frame.contentWindow?.postMessage(
+				{ giscus: { setConfig: { theme } } },
+				GISCUS_ORIGIN,
+			);
+		}
+	}
+
+	// Swup re-executes this module after every page swap, so registering the
+	// page:view hook more than once would mount the widget repeatedly.
+	function registerSwupHook(): void {
+		if (runtime.hooked) return;
+		runtime.hooked = true;
+		window.swup?.hooks.on("page:view", mountGiscus);
+	}
+
+	// Mount right away instead of waiting for Swup: on the first load the
+	// container is already in the DOM, and on later visits the scripts plugin
+	// runs this module again after the new markup is in place.
+	mountGiscus();
+
+	if (!runtime.observed) {
+		runtime.observed = true;
+		new MutationObserver(syncGiscusTheme).observe(document.documentElement, {
+			attributes: true,
+			attributeFilter: ["class"],
+		});
+	}
+
+	if (window.swup) {
+		registerSwupHook();
+	} else {
+		document.addEventListener("swup:enable", registerSwupHook);
+	}
+</script>

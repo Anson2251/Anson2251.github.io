@@ -1,5 +1,6 @@
 import type {
 	ExpressiveCodeConfig,
+	GiscusConfig,
 	LicenseConfig,
 	NavBarConfig,
 	ProfileConfig,
@@ -74,6 +75,21 @@ export const licenseConfig: LicenseConfig = {
 	enable: true,
 	name: "CC BY-SA 4.0",
 	url: "https://creativecommons.org/licenses/by-sa/4.0/",
+};
+
+export const giscusConfig: GiscusConfig = {
+	// Comments are stored as GitHub Discussions by giscus (https://giscus.app).
+	// The repo ID and category ID below come from https://giscus.app; re-check
+	// them if Discussions or the category are ever recreated.
+	enable: true,
+	repo: "Anson2251/Anson2251.github.io",
+	repoId: "R_kgDOJJ1axA",
+	category: "Announcements",
+	categoryId: "DIC_kwDOJJ1axM4DKYlU",
+	mapping: "pathname",
+	strict: false,
+	reactionsEnabled: true,
+	inputPosition: "bottom",
 };
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
