@@ -14,11 +14,15 @@ At the end of the last post I said the next step was VGG on CIFAR-10. I never go
 
 Turns out I didn't need to: they're all the same expression. Start with the most familiar one: ReLU is defined as
 
-$$\mathrm{ReLU}(x) = \max(x,0)$$
+$$
+\mathrm{ReLU}(x) = \max(x,0)
+$$
 
 Expand the $\max$ by cases, and it becomes $x$ times an on/off switch:
 
-$$\max(x,0) = x\cdot\mathbf{1}_{x>0} = x\cdot H(x)$$
+$$
+\max(x,0) = x\cdot\mathbf{1}_{x>0} = x\cdot H(x)
+$$
 
 $\mathbf{1}_{x>0}$ is the Heaviside step function $H(x)$.
 
@@ -77,11 +81,15 @@ First, let's get the FC layer straight. One linear layer computes $y=Wx+b$, with
 
 What happens algebraically when a gate shuts depends on the next layer. The next layer's pre-activation is
 
-$$z = W'y = \sum_{i=1}^{m} W'_i\, y_i$$
+$$
+z = W'y = \sum_{i=1}^{m} W'_i\, y_i
+$$
 
 where $W'_i$ is the $i$-th column of $W'$. When the $i$-th gate closes fully ($y_i=0$), the term $W'_i y_i$ drops out of the sum, which is the same as deleting the $i$-th column of $W'$. So one neuron's contribution to the whole network is the rank-one atom formed by the input direction $w_i$ and the output direction $W'_i$:
 
-$$A_i = W'_i\, w_i^\top$$
+$$
+A_i = W'_i\, w_i^\top
+$$
 
 The gate decides whether that atom counts for this input. Selection and assembly come apart here: the atom itself is the feature, one input direction paired with one output direction; the gate picks, the sum assembles. Between layers the network just recombines the selected atoms.
 
@@ -121,7 +129,9 @@ Back to that limitation. In $f(x)=x\cdot g(x)$, the gate and the gated value are
 
 Make $x$ a vector instead of a scalar and the restriction loosens. GLU does exactly this. GLU stands for Gated Linear Unit: two linear projections of the same input, one as the value, one through a sigmoid as the gate.
 
-$$\mathrm{GLU}(x) = (Wx)\odot\sigma(Vx)$$
+$$
+\mathrm{GLU}(x) = (Wx)\odot\sigma(Vx)
+$$
 
 Here $x$ is a vector, $W$ and $V$ are two matrices, $\odot$ is elementwise multiplication, biases omitted. The value path is $Wx$, the gate is $\sigma(Vx)$. The gate on the $i$-th component is decided by $(Vx)_i$, which is a linear combination of all input components. The gate looks along another direction, not at its own component.
 
