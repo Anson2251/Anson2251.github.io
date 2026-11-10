@@ -53,6 +53,9 @@ importers:
       '@iconify/svelte':
         specifier: ^4.2.0
         version: 4.2.0(svelte@5.57.3)
+      '@mermanjs/node':
+        specifier: 0.10.0-alpha.2
+        version: 0.10.0-alpha.2
       '@swup/astro':
         specifier: ^1.8.0
         version: 1.8.0(@types/babel__core@7.20.5)
@@ -1586,6 +1589,52 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@mermanjs/node-darwin-arm64@0.10.0-alpha.2':
+    resolution: {integrity: sha512-abdr5tV09Yhv6LSBGE1FHQ/S8BQg/oDYWEGUnKzOuvdtyHdN8b1d8AeEXYaScgVh4zakTIhlCiSHGB3Nw0qhow==}
+    engines: {node: '>=22.0.0'}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@mermanjs/node-darwin-x64@0.10.0-alpha.2':
+    resolution: {integrity: sha512-uwd07vtelSv0axtKikJD9Gk0G+cij3vOjO3KYH3QDtXXMH8dKl5eUWH3LdKg5AIF8cyjfHCYAB86ZkvGq4KV+A==}
+    engines: {node: '>=22.0.0'}
+    cpu: [x64]
+    os: [darwin]
+
+  '@mermanjs/node-linux-arm64-gnu@0.10.0-alpha.2':
+    resolution: {integrity: sha512-PAi7XlZ+ONU2qM8qe5HmnS0YEdvKI7xm7yWVxs5fx0QHKpzMsvFpnNii3awDJv7a3IR39enLgTofBHjIj3J6Xg==}
+    engines: {node: '>=22.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@mermanjs/node-linux-arm64-musl@0.10.0-alpha.2':
+    resolution: {integrity: sha512-JBYNNv+QWLrVRklh/Iz1WmVQucKbNKtmvZH58H3P8tWChj7jMBJPzsCBNiQg/6knbmyLa67J1VhSftVJSyHfWw==}
+    engines: {node: '>=22.0.0'}
+    cpu: [arm64]
+    os: [linux]
+
+  '@mermanjs/node-linux-x64-gnu@0.10.0-alpha.2':
+    resolution: {integrity: sha512-mIxZC0AQyzgv+nQjwqwIaG0J0l9kVCIjiTBY+UZk8GmpKvnONcduxDlYSG5Fal0TB28NtZy61l6jlh5ZqXBXPw==}
+    engines: {node: '>=22.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@mermanjs/node-linux-x64-musl@0.10.0-alpha.2':
+    resolution: {integrity: sha512-snir37wTgv6Jq6YMii5GoyFFVNfBJLE1SnZqpN0nZ1zvpagGDpGdvNINQeJnDTJKm9PTAveaP8xCJ+kDtTzfbw==}
+    engines: {node: '>=22.0.0'}
+    cpu: [x64]
+    os: [linux]
+
+  '@mermanjs/node-win32-x64-msvc@0.10.0-alpha.2':
+    resolution: {integrity: sha512-VriPLr/V/XRdogGwoiACpVlzRXzrcBIvnvpJjvFbcUZkiv4lkmRH3L8FC/UQCuh/xW3w00f04TecZNPZuU32HQ==}
+    engines: {node: '>=22.0.0'}
+    cpu: [x64]
+    os: [win32]
+
+  '@mermanjs/node@0.10.0-alpha.2':
+    resolution: {integrity: sha512-cS1OmrxCsiallvWLI/TIGKVfVfJRZ+Mvxqe8Md19l4jHz24XbDqudqUzXNlgGN+SYprBp1GzXxZb1P4vPxCUGg==}
+    engines: {node: '>=22.0.0'}
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     resolution: {integrity: sha512-oTXEIha4SsuXdTA4Iyskj0kpdx2yVXdhd75c2v3xGrHFfVMsbhTPZU/nMPL4sWKo4pBHm3aucLaqGlF696dTyQ==}
@@ -6907,6 +6956,37 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
+
+  '@mermanjs/node-darwin-arm64@0.10.0-alpha.2':
+    optional: true
+
+  '@mermanjs/node-darwin-x64@0.10.0-alpha.2':
+    optional: true
+
+  '@mermanjs/node-linux-arm64-gnu@0.10.0-alpha.2':
+    optional: true
+
+  '@mermanjs/node-linux-arm64-musl@0.10.0-alpha.2':
+    optional: true
+
+  '@mermanjs/node-linux-x64-gnu@0.10.0-alpha.2':
+    optional: true
+
+  '@mermanjs/node-linux-x64-musl@0.10.0-alpha.2':
+    optional: true
+
+  '@mermanjs/node-win32-x64-msvc@0.10.0-alpha.2':
+    optional: true
+
+  '@mermanjs/node@0.10.0-alpha.2':
+    optionalDependencies:
+      '@mermanjs/node-darwin-arm64': 0.10.0-alpha.2
+      '@mermanjs/node-darwin-x64': 0.10.0-alpha.2
+      '@mermanjs/node-linux-arm64-gnu': 0.10.0-alpha.2
+      '@mermanjs/node-linux-arm64-musl': 0.10.0-alpha.2
+      '@mermanjs/node-linux-x64-gnu': 0.10.0-alpha.2
+      '@mermanjs/node-linux-x64-musl': 0.10.0-alpha.2
+      '@mermanjs/node-win32-x64-msvc': 0.10.0-alpha.2
 
   '@napi-rs/lzma-linux-x64-gnu@1.5.1':
     optional: true

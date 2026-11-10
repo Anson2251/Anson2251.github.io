@@ -166,6 +166,12 @@ export default defineConfig({
 		],
 	},
 	vite: {
+		ssr: {
+			// remark-mermaid.mjs loads Merman's native binding while markdown is
+			// compiled. Keep it out of Vite's module runner, which cannot load
+			// the platform `.node` binary.
+			external: ["@mermanjs/node"],
+		},
 		build: {
 			rollupOptions: {
 				onwarn(warning, warn) {

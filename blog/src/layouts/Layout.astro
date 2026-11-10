@@ -624,7 +624,9 @@ async function renderMermaid(): Promise<void> {
 	);
 	if (!needsRender) return;
 	try {
-		const { default: mermaid } = await import(MERMAID_CDN);
+		// The specifier is a runtime CDN URL, so there is nothing for Vite to
+		// statically analyse; leave it to the browser's own loader.
+		const { default: mermaid } = await import(/* @vite-ignore */ MERMAID_CDN);
 		for (const pre of pres) {
 			if (!pre.dataset.source) pre.dataset.source = pre.textContent ?? "";
 			// mermaid skips elements it has already processed; clear the flag so
