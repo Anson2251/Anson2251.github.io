@@ -19,9 +19,16 @@
         }
     }
 
+    /* `.link` and `.expand-animation` live in main.css. @apply only sees
+       classes registered in the same PostCSS run, and this file is compiled
+       before that layer on a cold cache, which used to fail the whole build
+       with "The `link` class does not exist". Keep the utilities inline. */
     a:not(.no-styling) {
-        @apply relative bg-none link font-medium text-[var(--primary)]
-        underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4;
+        @apply relative z-0 bg-none transition rounded-md p-1 -m-1 font-medium text-[var(--primary)]
+        underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4
+        before:absolute before:inset-0 before:-z-10 before:scale-[0.85] before:rounded-[inherit] before:transition before:ease-out
+        hover:before:scale-100 hover:before:bg-[var(--btn-plain-bg-hover)]
+        active:bg-none active:before:bg-[var(--btn-plain-bg-active)];
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
         display: inline-block;
