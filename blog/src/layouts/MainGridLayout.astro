@@ -78,6 +78,18 @@ const mainPanelTop = siteConfig.banner.enable
                 </Icon>
             </a>}
 
+            <!-- Banner caption copied from the landing page (WritingSection).
+                 Home page only: revealed via .lg:is-home in Layout.astro. -->
+            {siteConfig.banner.enable && <div id="banner-caption" aria-label="Banner image caption"
+                                               class="absolute flex-col items-start gap-0.5 px-3.5 py-2 text-left font-mono
+                                               hover:shadow-lg hover:backdrop-blur-md rounded-xl dark:hover:bg-black/55 transition-[background-color,backdrop-filter] duration-200 ease-out
+                                               left-4 md:left-4 top-[-5.75rem] onload-animation"
+            >
+                <span class="uppercase text-sm font-medium text-white/90">University Ave, near UWaterloo</span>
+                <span class="uppercase text-xs text-white/75">Photo by Anson2251</span>
+                <span class="uppercase text-xs text-white/75">Paint filter by GPT Image 2.5</span>
+            </div>}
+
 
             <SideBar class="mb-4 row-start-2 row-end-3 col-span-2 lg:row-start-1 lg:row-end-2 lg:col-span-1 lg:max-w-[17.5rem] onload-animation" headings={headings}></SideBar>
 

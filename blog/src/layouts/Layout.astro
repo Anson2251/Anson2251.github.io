@@ -173,30 +173,48 @@ const bannerOffset =
 		mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
 	}
 
-	.enable-banner.is-home #banner-wrapper {
-		@apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)]
-	}
 	.enable-banner #banner-wrapper {
 		@apply h-[var(--banner-height-home)]
-	}
-
-	.enable-banner.is-home #banner {
-		@apply h-[var(--banner-height-home)] translate-y-0
 	}
 	.enable-banner #banner {
 		@apply h-[var(--banner-height-home)] translate-y-[var(--bannerOffset)]
 	}
-	.enable-banner.is-home #main-grid {
-		@apply translate-y-[var(--banner-height-extend)];
-	}
 	.enable-banner #top-row {
 		@apply h-[calc(var(--banner-height-home)_-_4.5rem)] transition-all duration-300
 	}
-	.enable-banner.is-home #sidebar-sticky {
-		@apply top-[calc(1rem_-_var(--banner-height-extend))]
-	}
 	.navbar-hidden {
 		@apply opacity-0 -translate-y-16
+	}
+
+	/* Banner caption (copied from the landing page) — home page only,
+	   at every viewport size. Both rules live in the same layer so that
+	   specificity decides: the home rule outranks the base hiding rule.
+	   (A `hidden` utility class would win over both since utilities are
+	   in a later layer, so don't use one here.) */
+	.enable-banner #banner-caption {
+		@apply hidden
+	}
+	.enable-banner.lg\:is-home #banner-caption {
+		@apply flex
+	}
+
+	/* Home-page (tall banner) overrides, desktop only.
+	   The body flag class is literally `lg:is-home`, so it must be
+	   escaped as `.lg\:is-home` and gated behind the lg breakpoint
+	   (same pattern as main.css). Plain `.is-home` never matches. */
+	@media (min-width: 1024px) {
+		.enable-banner.lg\:is-home #banner-wrapper {
+			@apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)]
+		}
+		.enable-banner.lg\:is-home #banner {
+			@apply h-[var(--banner-height-home)] translate-y-0
+		}
+		.enable-banner.lg\:is-home #main-grid {
+			@apply translate-y-[var(--banner-height-extend)];
+		}
+		.enable-banner.lg\:is-home #sidebar-sticky {
+			@apply top-[calc(1rem_-_var(--banner-height-extend))]
+		}
 	}
 }
 </style>

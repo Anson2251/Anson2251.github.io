@@ -1,4 +1,9 @@
 @reference "tailwindcss";
+/* Class-based dark mode, mirroring app.css. This file is also emitted as its
+   own bundle, where app.css's @custom-variant is out of scope; without this,
+   `dark:` here falls back to `prefers-color-scheme` and leaks dark colors
+   into the light theme whenever the OS is in dark mode. */
+@custom-variant dark (&:where(.dark, .dark *));
 /* Custom classes consumed via @apply elsewhere must be real utilities in
    v4 (plain @layer classes are invisible to @apply). */
 @utility expand-animation {
