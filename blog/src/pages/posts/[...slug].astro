@@ -78,7 +78,9 @@ const jsonLd = {
 	inLanguage: entry.data.lang
 		? entry.data.lang.replace("_", "-")
 		: siteConfig.lang.replace("_", "-"),
-	// TODO include cover image here
+	// No `image`: covers are bundled assets with hashed build-time URLs, so
+	// there is no stable absolute URL to advertise here (same reason og:image
+	// is omitted in Layout.astro).
 };
 ---
 <MainGridLayout banner={entry.data.image} title={entry.data.title} description={entry.data.description} lang={entry.data.lang} setOGTypeArticle={true} headings={headings}>

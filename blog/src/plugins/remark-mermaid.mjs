@@ -6,9 +6,8 @@ import { visit } from "unist-util-visit";
 // time keeps Mermaid's browser bundle and its CDN request off the page.
 //
 // Both appearances are emitted; CSS picks one from `html.dark`. If a diagram
-// fails to render, the fence is left as `pre.mermaid-src`, which the
-// client-side renderer in Layout.astro still picks up, so one bad diagram
-// degrades instead of failing the build.
+// fails to render, the fence degrades to a static code block so one bad
+// diagram never fails the build and no client-side renderer is needed.
 
 const MERMAID_LANG = "mermaid";
 const LIGHT_THEME = "neutral";
@@ -97,7 +96,7 @@ function fallbackFence(source) {
 		.replace(/&/g, "&amp;")
 		.replace(/</g, "&lt;")
 		.replace(/>/g, "&gt;");
-	return `<pre class="mermaid-src not-prose" data-pagefind-ignore>${escaped}</pre>`;
+	return `<pre class="mermaid-fallback not-prose" data-pagefind-ignore><code class="language-mermaid">${escaped}</code></pre>`;
 }
 
 export function remarkMermaid() {

@@ -223,50 +223,6 @@ import {
 } from "../constants/constants";
 import { siteConfig } from '../config';
 
-/* Preload fonts */
-// (async function() {
-// 	try {
-// 		await Promise.all([
-// 			document.fonts.load("400 1em Barlow"),
-// 			document.fonts.load("700 1em Barlow"),
-// 		]);
-// 		document.body.classList.remove("hidden");
-// 	} catch (error) {
-// 		console.log("Failed to load fonts:", error);
-// 	}
-// })();
-
-/* TODO This is a temporary solution for style flicker issue when the transition is activated */
-/* issue link: https://github.com/withastro/astro/issues/8711, the solution get from here too */
-/* update: fixed in Astro 3.2.4 */
-/*
-function disableAnimation() {
-	const css = document.createElement('style')
-	css.appendChild(
-		document.createTextNode(
-			`*{
-              -webkit-transition:none!important;
-              -moz-transition:none!important;
-              -o-transition:none!important;
-              -ms-transition:none!important;
-              transition:none!important
-              }`
-		)
-	)
-	document.head.appendChild(css)
-
-	return () => {
-		// Force restyle
-		;(() => window.getComputedStyle(document.body))()
-
-		// Wait for next tick before removing
-		setTimeout(() => {
-			document.head.removeChild(css)
-		}, 1)
-	}
-}
-*/
-
 const bannerEnabled = !!document.getElementById('banner-wrapper')
 
 function setClickOutsideToClose(panel: string, ignores: string[]) {
@@ -375,7 +331,6 @@ function showBanner() {
 }
 
 function init() {
-	// disableAnimation()()		// TODO
 	loadTheme();
 	loadHue();
 	initCustomScrollbar();
@@ -386,18 +341,6 @@ function init() {
 init();
 
 const setup = () => {
-	// TODO: temp solution to change the height of the banner
-/*
-	window.swup.hooks.on('animation:out:start', () => {
-		const path = window.location.pathname
-		const body = document.querySelector('body')
-		if (path[path.length - 1] === '/' && !body.classList.contains('is-home')) {
-			body.classList.add('is-home')
-		} else if (path[path.length - 1] !== '/' && body.classList.contains('is-home')) {
-			body.classList.remove('is-home')
-		}
-	})
-*/
 	window.swup.hooks.on('link:click', () => {
 		// Remove the delay for the first time page load
 		document.documentElement.style.setProperty('--content-delay', '0ms')
@@ -574,115 +517,5 @@ if (window.swup) {
 	setup()
 } else {
 	document.addEventListener("swup:enable", setup)
-}
-</script>
-
-<script>
-// Render ```mermaid fences (converted to pre.mermaid-src by remark-mermaid)
-// via CDN ESM, following Fuwari's active light/dark theme.
-// Guarded so pages without diagrams fetch nothing.
-const MERMAID_CDN =
-	"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
-
-// Swup's scripts plugin re-executes every body script after a page swap, so this
-// module is evaluated again on each visit. Keep the one-time setup state on
-// window, otherwise every navigation registers another page:view hook and two
-// concurrent mermaid.run() calls rewrite the same <pre> while it is rendering.
-interface MermaidRuntime {
-	mounted: boolean;
-	queue: Promise<void>;
-}
-const mermaidRuntime: MermaidRuntime = ((
-	window as unknown as { __mermaidRuntime?: MermaidRuntime }
-).__mermaidRuntime ??= { mounted: false, queue: Promise.resolve() });
-
-function mermaidTheme(): string {
-	return document.documentElement.classList.contains("dark") ? "dark" : "neutral";
-}
-
-function diagramLabel(source: string): string {
-	const first = (source.trim().split("\n")[0] ?? "").trim().toLowerCase();
-	if (first.startsWith("sequencediagram")) return "Sequence diagram";
-	if (first.startsWith("gantt")) return "Gantt chart";
-	if (first.startsWith("pie")) return "Pie chart";
-	if (first.startsWith("mindmap")) return "Mind map";
-	if (first.startsWith("timeline")) return "Timeline";
-	if (first.startsWith("journey")) return "User journey diagram";
-	if (first.startsWith("gitgraph")) return "Git graph";
-	if (first.startsWith("erdiagram")) return "Entity relationship diagram";
-	if (first.startsWith("classdiagram")) return "Class diagram";
-	if (first.startsWith("statediagram")) return "State diagram";
-	return "Diagram";
-}
-
-async function renderMermaid(): Promise<void> {
-	const pres = Array.from(document.querySelectorAll<HTMLElement>("pre.mermaid-src"));
-	if (pres.length === 0) return;
-	const theme = mermaidTheme();
-	const needsRender = pres.some(
-		(pre) => !pre.dataset.source || pre.dataset.renderedTheme !== theme,
-	);
-	if (!needsRender) return;
-	try {
-		// The specifier is a runtime CDN URL, so there is nothing for Vite to
-		// statically analyse; leave it to the browser's own loader.
-		const { default: mermaid } = await import(/* @vite-ignore */ MERMAID_CDN);
-		for (const pre of pres) {
-			if (!pre.dataset.source) pre.dataset.source = pre.textContent ?? "";
-			// mermaid skips elements it has already processed; clear the flag so
-			// restoring the source (e.g. on theme change) actually re-renders.
-			pre.removeAttribute("data-processed");
-			pre.textContent = pre.dataset.source;
-		}
-		mermaid.initialize({ startOnLoad: false, theme });
-		await mermaid.run({ querySelector: "pre.mermaid-src" });
-		for (const pre of document.querySelectorAll<HTMLElement>("pre.mermaid-src")) {
-			pre.dataset.renderedTheme = theme;
-			const svg = pre.querySelector("svg");
-			if (svg) {
-				// Mermaid emits graphics-aria roles that most checkers flag
-				// as unknown; normalize every diagram to a labelled image.
-				svg.setAttribute("role", "img");
-				svg.removeAttribute("aria-roledescription");
-				if (!svg.getAttribute("aria-label") && !svg.querySelector("title")) {
-					svg.setAttribute("aria-label", diagramLabel(pre.dataset.source ?? ""));
-				}
-			}
-		}
-	} catch (e) {
-		console.error("[mermaid] render failed", e);
-	}
-}
-
-// Serialize renders so overlapping visits or a theme flip never call
-// mermaid.run() on an element that is already mid-render.
-function scheduleMermaidRender(): void {
-	mermaidRuntime.queue = mermaidRuntime.queue.then(renderMermaid);
-}
-
-let lastMermaidTheme = mermaidTheme();
-function onThemeFlip(): void {
-	const theme = mermaidTheme();
-	if (theme === lastMermaidTheme) return;
-	lastMermaidTheme = theme;
-	scheduleMermaidRender();
-}
-
-const setupMermaid = () => {
-	if (mermaidRuntime.mounted) return;
-	mermaidRuntime.mounted = true;
-	lastMermaidTheme = mermaidTheme();
-	scheduleMermaidRender();
-	window.swup.hooks.on("page:view", scheduleMermaidRender);
-	new MutationObserver(onThemeFlip).observe(document.documentElement, {
-		attributes: true,
-		attributeFilter: ["class"],
-	});
-};
-
-if (window.swup) {
-	setupMermaid();
-} else {
-	document.addEventListener("swup:enable", setupMermaid);
 }
 </script>
