@@ -53,19 +53,19 @@ const getPageUrl = (p: number) => {
 
 <div class:list={[className, "flex flex-row gap-3 justify-center"]} style={style}>
     <a href={page.url.prev || ""} aria-label={page.url.prev ? "Previous Page" : null}
-       class:list={["btn-card shrink-0 overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
+       class:list={["btn-card shrink-0 overflow-hidden rounded-lg text-[color:var(--primary)] w-11 h-11",
            {"disabled": page.url.prev == undefined}
        ]}
     >
         <Icon name="material-symbols:chevron-left-rounded" class="text-[1.75rem]"></Icon>
     </a>
     <div class="min-w-0 overflow-auto shadow-xl">
-        <div class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold overflow-hidden w-fit">
+        <div class="bg-[color:var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold overflow-hidden w-fit">
             {pages.map((p) => {
                 if (p == HIDDEN)
                     return <Icon name="material-symbols:more-horiz" class="mx-1"/>;
                 if (p == page.currentPage)
-                    return <div class="h-11 w-11 bg-[var(--primary)] flex items-center justify-center
+                    return <div class="h-11 w-11 bg-[color:var(--primary)] flex items-center justify-center
                         font-bold text-white dark:text-black/70"
                     >
                         {p}
@@ -77,7 +77,7 @@ const getPageUrl = (p: number) => {
         </div>
     </div>
     <a href={page.url.next || ""} aria-label={page.url.next ? "Next Page" : null}
-       class:list={["btn-card shrink-0 overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
+       class:list={["btn-card shrink-0 overflow-hidden rounded-lg text-[color:var(--primary)] w-11 h-11",
            {"disabled": page.url.next == undefined}
        ]}
     >

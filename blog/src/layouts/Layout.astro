@@ -21,10 +21,6 @@ import { pathsEqual, url } from "../utils/url-utils";
 import "katex/dist/katex.css";
 import "../styles/app.css";
 import "../styles/markdown-extend.styl";
-import "../styles/transition.css";
-import "../styles/scrollbar.css";
-import "../styles/expressive-code.css";
-import "../styles/photoswipe.css";
 
 interface Props {
 	title?: string;
@@ -79,7 +75,7 @@ const bannerOffset =
 ---
 
 <!DOCTYPE html>
-<html lang={siteLang} class="bg-[var(--page-bg)] transition text-[14px] md:text-[16px]"
+<html lang={siteLang} class="bg-[color:var(--page-bg)] transition text-[14px] md:text-[16px]"
 	  data-overlayscrollbars-initialize
 >
 	<head>
@@ -170,7 +166,7 @@ const bannerOffset =
 	'banner-height-home': `${BANNER_HEIGHT_HOME}vh`,
 	'banner-height': `${BANNER_HEIGHT}vh`,
 }}>
-@tailwind components;
+@reference "tailwindcss";
 @layer components {
 	#banner-wrapper {
 		-webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 70%, transparent 100%);
@@ -291,6 +287,7 @@ function initCustomScrollbar() {
 
 		element.parentNode.insertBefore(container, element);
 		container.appendChild(element);
+		element.style.boxSizing = "border-box";
 
 		OverlayScrollbars(container, {
 			scrollbars: {

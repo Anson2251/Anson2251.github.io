@@ -1,2 +1,19 @@
+@import "tailwindcss";
 @import "./main.css";
 @import "./markdown.css";
+@import "./transition.css";
+@import "./scrollbar.css";
+@import "./expressive-code.css";
+@import "./photoswipe.css";
+
+/* Class-based dark mode (the `dark` class is toggled on <html> by setting-utils).
+   Without this, `dark:` follows the OS prefers-color-scheme instead. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@plugin "@tailwindcss/typography";
+
+@theme {
+	--font-sans: "Barlow", ui-sans-serif, system-ui, sans-serif,
+		"Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+		"Noto Color Emoji";
+}

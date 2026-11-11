@@ -1,3 +1,4 @@
+@reference "tailwindcss";
 .custom-md {
     h1 {
         @apply text-3xl;
@@ -5,30 +6,29 @@
 
     h1, h2, h3, h4, h5, h6 {
         .anchor {
-            @apply transition -m-0.5 ml-[0.2ch] p-0.5 select-none opacity-0 no-underline !important;
+            @apply transition! -m-0.5! ml-[0.2ch]! p-0.5! select-none! opacity-0! no-underline!;
 
             .anchor-icon {
-                @apply mx-[0.45ch] !important;
+                @apply mx-[0.45ch]!;
             }
         }
 
         &:hover {
             .anchor {
-                @apply opacity-100 !important;
+                @apply opacity-100!;
             }
         }
     }
 
-    /* `.link` and `.expand-animation` live in main.css. @apply only sees
-       classes registered in the same PostCSS run, and this file is compiled
-       before that layer on a cold cache, which used to fail the whole build
-       with "The `link` class does not exist". Keep the utilities inline. */
+    /* Keep the utilities inline rather than @apply-ing `.link` from main.css;
+       all stylesheets are compiled into one Tailwind document, but explicit
+       utilities keep this file independent of cross-file class resolution. */
     a:not(.no-styling) {
-        @apply relative z-0 bg-none transition rounded-md p-1 -m-1 font-medium text-[var(--primary)]
-        underline decoration-[var(--link-underline)] decoration-1 decoration-dashed underline-offset-4
+        @apply relative z-0 bg-none transition rounded-md p-1 -m-1 font-medium text-[color:var(--primary)]
+        underline decoration-[color:var(--link-underline)] decoration-1 decoration-dashed underline-offset-4
         before:absolute before:inset-0 before:-z-10 before:scale-[0.85] before:rounded-[inherit] before:transition before:ease-out
-        hover:before:scale-100 hover:before:bg-[var(--btn-plain-bg-hover)]
-        active:bg-none active:before:bg-[var(--btn-plain-bg-active)];
+        hover:before:scale-100 hover:before:bg-[color:var(--btn-plain-bg-hover)]
+        active:bg-none active:before:bg-[color:var(--btn-plain-bg-active)];
         box-decoration-break: clone;
         -webkit-box-decoration-break: clone;
         display: inline-block;
@@ -42,7 +42,7 @@
     }
 
     code {
-        @apply bg-[var(--inline-code-bg)] text-[var(--inline-code-color)] px-1 py-0.5 rounded-md overflow-hidden;
+        @apply bg-[color:var(--inline-code-bg)] text-[color:var(--inline-code-color)] px-1 py-0.5 rounded-md overflow-hidden;
 
         font-family: 'Maple Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
         &:before {
@@ -69,14 +69,14 @@
     .expressive-code {
         @apply my-4;
         ::selection {
-            @apply bg-[var(--codeblock-selection)];
+            @apply bg-[color:var(--codeblock-selection)];
         }
     }
 
 
     ul, ol {
         li::marker {
-            @apply text-[var(--primary)];
+            @apply text-[color:var(--primary)];
         }
     }
 
@@ -85,7 +85,7 @@
         font-weight: inherit;
 
         &:before {
-            @apply content-[''] absolute -left-1 block transition bg-[var(--btn-regular-bg)] h-full w-1 rounded-full;
+            @apply content-[''] absolute -left-1 block transition bg-[color:var(--btn-regular-bg)] h-full w-1 rounded-full;
         }
 
         /* Remove the double quotes from default styles */

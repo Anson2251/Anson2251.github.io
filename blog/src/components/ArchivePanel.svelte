@@ -131,7 +131,7 @@ onMount(() => {
                 </div>
                 <div class="w-[15%] md:w-[10%]">
                     <div
-                            class="h-3 w-3 bg-none rounded-full outline outline-[var(--primary)] mx-auto
+                            class="h-3 w-3 bg-none rounded-full outline outline-[color:var(--primary)] mx-auto
                   -outline-offset-[2px] z-50 outline-3"
                     ></div>
                 </div>
@@ -144,7 +144,7 @@ onMount(() => {
                 <a
                         href={getPostUrlBySlug(post.slug)}
                         aria-label={post.data.title}
-                        class="group btn-plain !block h-10 w-full rounded-lg hover:text-[initial]"
+                        class="group btn-plain block! h-10 w-full rounded-lg hover:[color:initial]"
                 >
                     <div class="flex flex-row justify-start items-center h-full">
                         <!-- date -->
@@ -155,19 +155,19 @@ onMount(() => {
                         <!-- dot and line -->
                         <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
                             <div
-                                    class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
-                       bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
+                                    class="transition-all mx-auto w-1 h-1 rounded-sm group-hover:h-5
+                       bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[color:var(--primary)]
                        outline outline-4 z-50
-                       outline-[var(--card-bg)]
-                       group-hover:outline-[var(--btn-plain-bg-hover)]
-                       group-active:outline-[var(--btn-plain-bg-active)]"
+                       outline-[color:var(--card-bg)]
+                       group-hover:outline-[color:var(--btn-plain-bg-hover)]
+                       group-active:outline-[color:var(--btn-plain-bg-active)]"
                             ></div>
                         </div>
 
                         <!-- post title -->
                         <div
                                 class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
-                     group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
+                     group-hover:translate-x-1 transition-all group-hover:text-[color:var(--primary)]
                      text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
                         >
                             {post.data.title}

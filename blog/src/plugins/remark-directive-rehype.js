@@ -19,6 +19,17 @@ export function parseDirectiveNode() {
 				) {
 					// Add a flag to the node to indicate that it has a directive label
 					node.attributes["has-directive-label"] = true;
+					// remark-directive v4 keeps trailing whitespace in labels;
+					// trim it so the title renders without a stray space.
+					let target = node.children[0];
+					while (target && target.type !== "text") {
+						const kids = target.children;
+						if (!kids || kids.length === 0) break;
+						target = kids[kids.length - 1];
+					}
+					if (target && target.type === "text") {
+						target.value = target.value.trimEnd();
+					}
 				}
 				const hast = h(node.name, node.attributes);
 
