@@ -6,7 +6,7 @@ import { getCategoryUrl } from "@utils/url-utils.ts";
 // Content Layer ids are file paths (e.g. "my-post.md"); the URL slug drops
 // the extension. Posts live flat in the collection, so no directories to strip.
 export function getPostSlug(entry: { id: string }): string {
-	return entry.id.replace(/\.md$/, "");
+	return entry.id.replace(/\.mdx?$/, "");
 }
 
 // // Retrieve posts and sort them by publication date

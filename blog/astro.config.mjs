@@ -1,4 +1,5 @@
 import { unified } from "@astrojs/markdown-remark";
+import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 import tailwindcss from "@tailwindcss/vite";
@@ -108,6 +109,7 @@ export default defineConfig({
 			}
 		}),
         svelte(),
+		mdx(),
 		sitemap({
 			filter: (page) => !page.includes("/404"),
 		}),
