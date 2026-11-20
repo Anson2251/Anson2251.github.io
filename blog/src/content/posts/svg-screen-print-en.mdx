@@ -1,6 +1,6 @@
 ---
 title: "A Screen Print That Isn't on Paper: From Sine Waves to Bleed, Clogged Mesh and Ragged Edges"
-published: 2026-11-17
+published: 2026-11-19
 description: "No Lissajous screen print at the poster sale, so I asked an LLM to print one from a single prompt, then took its SVG filters apart: ink spread, clogged mesh, edge bleed, misregistration and paper fiber."
 tags: ["SVG", "Filters", "Screen Printing", "Constructivism", "Design"]
 category: "Design"
@@ -48,7 +48,7 @@ The first version made me take back half of that doubt. It was nowhere near perf
 
 So my curiosity moved from whether it looked good to how it was made. I opened the file. SVG. No bitmap, not one line of canvas; the whole poster is vectors and filters. What the filters did was the surprise: each one targets a stage of screen printing, how ink spreads, how mesh clogs, how plates misregister, how paper takes ink.
 
-I copied the approach out of the poster's filters and built a component with live parameters. I didn't reuse the Lissajous curves, instead, I took the pattern back to its ingredients. A Lissajous figure is just two sine waves added at right angles, so the demo draws four sine waves at different frequencies, one each for K, M, C and Y, arranged from dark to light into a field with foreground and background. Thin lines are also the most sensitive carrier for defects: one clogged opening or one misregistered plate shows more on a line than on a solid block. I dropped the poster's red, black and white because that was a Constructivist choice and the demo is about the process, so it uses the printer's default four plates. CMYK is the color set printing actually uses, and every extra plate adds its own direction and distance of misregistration, which gives that part of the process enough to do. The panel can also show a single plate, with its own rough edges and specks. That is the second half of this post: translating each "defect" of screen printing into an SVG filter, to see what gets reproduced when you reproduce an old poster digitally.
+I copied the approach out of the poster's filters and built a component with live parameters. I didn't reuse the Lissajous curves, instead, I took the pattern back to its ingredients. A Lissajous figure is just two sine waves added at right angles, so the demo draws four sine waves at same frequency but different phases, one each for K, M, C and Y, arranged from dark to light into a field with foreground and background. Thin lines are also the most sensitive carrier for defects: one clogged opening or one misregistered plate shows more on a line than on a solid block. I dropped the poster's red, black and white because that was a Constructivist choice and the demo is about the process, so it uses the printer's default four plates. CMYK is the color set printing actually uses, and every extra plate adds its own direction and distance of misregistration, which gives that part of the process enough to do. The panel can also show a single plate, with its own rough edges and specks. That is the second half of this post: translating each "defect" of screen printing into an SVG filter, to see what gets reproduced when you reproduce an old poster digitally.
 
 ## Try it first
 
